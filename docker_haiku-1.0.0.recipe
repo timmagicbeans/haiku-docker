@@ -1,11 +1,12 @@
 SUMMARY="Docker Engine & Micro-VM with NVMM Acceleration for Haiku"
 DESCRIPTION="Provides standard docker CLI command execution and micro-VM management on Haiku OS powered by QEMU with NVMM hardware virtualization, automatic SSH port forwarding daemon, bidirectional dev sharing via sshfs, and Deskbar tray management. Persistent user data is safely maintained in ~/config/settings/docker-vm."
-HOMEPAGE="https://github.com/haikuports/haikuports"
+HOMEPAGE="https://github.com/timmagicbeans/haiku-docker"
 COPYRIGHT="2026 Haiku Docker Project"
 LICENSE="MIT"
 REVISION="1"
-SOURCE_URI="https://github.com/haikuports/haikuports/archive/refs/tags/docker_haiku-$portVersion.tar.gz"
-CHECKSUM_SHA256="5d22f4c008cf2aa31e68026c8ed72c6dbfa4053f02692dd658bfd3175a5c8307"
+SOURCE_URI="https://github.com/timmagicbeans/haiku-docker/archive/refs/tags/v$portVersion.tar.gz"
+CHECKSUM_SHA256="7a64093ff32cb6405bac7cd35d4e7dddb6ca4ce99739d152bb3a495800677fda"
+SOURCE_DIR="haiku-docker-$portVersion"
 
 ARCHITECTURES="x86_64"
 

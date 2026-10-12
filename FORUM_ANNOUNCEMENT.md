@@ -26,7 +26,7 @@ I'm excited to share **Haiku Docker v1.0.0**, bringing native Docker CLI capabil
 
 ### Requirements & Known Limitations
 * **Enabling NVMM on Haiku:**
-  Hardware virtualization requires CPU VT-x/SVM support (`sysinfo | grep -iE 'vmx|svm'`). The NVMM driver is provided by `/boot/system/add-ons/kernel/drivers/dev/misc/nvmm` and is accessed via the `/dev/misc/nvmm` character device. If running inside a VM, ensure nested virtualization is enabled on the outer hypervisor (e.g. KVM `-cpu host`, VirtualBox Nested VT-x).
+  Hardware virtualization requires CPU VT-x/SVM support (`sysinfo | grep -iE 'vmx|svm'`). The NVMM driver is **included out of the box in standard Haiku beta6** (`/boot/system/add-ons/kernel/drivers/dev/misc/nvmm` packaged in `haiku-r1~beta6`), providing `/dev/misc/nvmm` without requiring third-party drivers. If running Haiku inside a VM, ensure nested virtualization is exposed by the outer hypervisor (e.g. KVM `-cpu host`, VirtualBox Nested VT-x).
 * **Kernel Argument `noxsave` (No AVX):**
   The guest Linux kernel boots with `noxsave` due to an upstream NVMM XSAVE/XRSTOR emulation limitation in Linux 6.18+. AVX/AVX2 instruction sets are disabled inside the VM.
 * **Single vCPU (`-smp 1`):**

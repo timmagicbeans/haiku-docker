@@ -1,0 +1,250 @@
+AUTH 'sshd-session'[63810]: Invalid user root from 127.0.0.1 port 35536
+AUTH 'sshd-session'[63811]: Invalid user root from 127.0.0.1 port 35551
+AUTH 'sshd-session'[63810]: Failed none for invalid user root from 127.0.0.1 port 35536 ssh2
+AUTH 'sshd-session'[63809]: Failed password for invalid user root from 127.0.0.1 port 35518 ssh2
+AUTH 'sshd-session'[63811]: Failed none for invalid user root from 127.0.0.1 port 35551 ssh2
+AUTH 'sshd-session'[63810]: Failed password for invalid user root from 127.0.0.1 port 35536 ssh2
+AUTH 'sshd-session'[63809]: Failed password for invalid user root from 127.0.0.1 port 35518 ssh2
+AUTH 'sshd-session'[63811]: Failed password for invalid user root from 127.0.0.1 port 35551 ssh2
+AUTH 'sshd-session'[63810]: Failed password for invalid user root from 127.0.0.1 port 35536 ssh2
+AUTH 'sshd-session'[63809]: Connection closed by invalid user root 127.0.0.1 port 35518 [preauth]
+AUTH 'sshd-session'[63811]: Failed password for invalid user root from 127.0.0.1 port 35551 ssh2
+AUTH 'sshd-session'[63810]: Connection closed by invalid user root 127.0.0.1 port 35536 [preauth]
+AUTH 'sshd-session'[63811]: Connection closed by invalid user root 127.0.0.1 port 35551 [preauth]
+AUTH 'sshd-session'[63819]: Invalid user root from 127.0.0.1 port 35598
+AUTH 'sshd-session'[63819]: Failed none for invalid user root from 127.0.0.1 port 35598 ssh2
+AUTH 'sshd-session'[63819]: Failed password for invalid user root from 127.0.0.1 port 35598 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[63819]: Connection closed by invalid user root 127.0.0.1 port 35598 [preauth]
+AUTH 'sshd'[127]: drop connection #21 from [127.0.0.1]:35633 on [127.0.0.1]:22 Maxstartups
+AUTH 'sshd-session'[63825]: Invalid user root from 127.0.0.1 port 35615
+AUTH 'sshd-session'[63825]: Failed none for invalid user root from 127.0.0.1 port 35615 ssh2
+AUTH 'sshd-session'[63825]: Failed password for invalid user root from 127.0.0.1 port 35615 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[63825]: Connection closed by invalid user root 127.0.0.1 port 35615 [preauth]
+AUTH 'sshd-session'[63834]: Invalid user root from 127.0.0.1 port 35665
+AUTH 'sshd'[127]: drop connection #23 from [127.0.0.1]:35717 on [127.0.0.1]:22 Maxstartups
+AUTH 'sshd'[127]: drop connection #23 from [127.0.0.1]:35725 on [127.0.0.1]:22 Maxstartups
+AUTH 'sshd-session'[63834]: Failed none for invalid user root from 127.0.0.1 port 35665 ssh2
+AUTH 'sshd-session'[63834]: Failed password for invalid user root from 127.0.0.1 port 35665 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[63834]: Connection closed by invalid user root 127.0.0.1 port 35665 [preauth]
+AUTH 'sshd-session'[63841]: Invalid user root from 127.0.0.1 port 35696
+AUTH 'sshd-session'[63841]: Failed none for invalid user root from 127.0.0.1 port 35696 ssh2
+AUTH 'sshd-session'[63841]: Failed password for invalid user root from 127.0.0.1 port 35696 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[63843]: Invalid user root from 127.0.0.1 port 35727
+AUTH 'sshd-session'[63841]: Connection closed by invalid user root 127.0.0.1 port 35696 [preauth]
+AUTH 'sshd-session'[63843]: Failed none for invalid user root from 127.0.0.1 port 35727 ssh2
+AUTH 'sshd-session'[63843]: Failed password for invalid user root from 127.0.0.1 port 35727 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[63843]: Connection closed by invalid user root 127.0.0.1 port 35727 [preauth]
+AUTH 'sshd-session'[63623]: Received disconnect from 192.168.0.196 port 63429:11: disconnected by user
+AUTH 'sshd-session'[63623]: Disconnected from user user 192.168.0.196 port 63429
+AUTH 'sshd-session'[63856]: Accepted publickey for user from 192.168.0.196 port 63529 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[63858]: Received disconnect from 192.168.0.196 port 63529:11: disconnected by user
+AUTH 'sshd-session'[63858]: Disconnected from user user 192.168.0.196 port 63529
+AUTH 'sshd-session'[63862]: Accepted publickey for user from 192.168.0.196 port 63530 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[63864]: Received disconnect from 192.168.0.196 port 63530:11: disconnected by user
+AUTH 'sshd-session'[63864]: Disconnected from user user 192.168.0.196 port 63530
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63531 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[63884]: Accepted publickey for user from 192.168.0.196 port 63533 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[63886]: Received disconnect from 192.168.0.196 port 63533:11: disconnected by user
+AUTH 'sshd-session'[63886]: Disconnected from user user 192.168.0.196 port 63533
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63538 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[63894]: Accepted publickey for user from 192.168.0.196 port 63539 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[63899]: Received disconnect from 192.168.0.196 port 63539:11: disconnected by user
+AUTH 'sshd-session'[63899]: Disconnected from user user 192.168.0.196 port 63539
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63540 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63543 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63544 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[63920]: Accepted publickey for user from 192.168.0.196 port 63548 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[63922]: Received disconnect from 192.168.0.196 port 63548:11: disconnected by user
+AUTH 'sshd-session'[63922]: Disconnected from user user 192.168.0.196 port 63548
+AUTH 'sshd-session'[63928]: Accepted publickey for user from 192.168.0.196 port 63555 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[63930]: Received disconnect from 192.168.0.196 port 63555:11: disconnected by user
+AUTH 'sshd-session'[63930]: Disconnected from user user 192.168.0.196 port 63555
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63566 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[63940]: Accepted publickey for user from 192.168.0.196 port 63567 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[63943]: Received disconnect from 192.168.0.196 port 63567:11: disconnected by user
+AUTH 'sshd-session'[63943]: Disconnected from user user 192.168.0.196 port 63567
+AUTH 'sshd-session'[63954]: Accepted publickey for user from 192.168.0.196 port 63570 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[64131]: Accepted publickey for user from 192.168.0.196 port 63613 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[64133]: Received disconnect from 192.168.0.196 port 63613:11: disconnected by user
+AUTH 'sshd-session'[64133]: Disconnected from user user 192.168.0.196 port 63613
+AUTH 'sshd-session'[63370]: Received disconnect from 127.0.0.1 port 33501:11: disconnected by user
+AUTH 'sshd-session'[63370]: Disconnected from user user 127.0.0.1 port 33501
+AUTH 'sshd-session'[63100]: Received disconnect from 192.168.0.196 port 63331:11: disconnected by user
+AUTH 'sshd-session'[63100]: Disconnected from user user 192.168.0.196 port 63331
+KERN: package_daemon: [30928199717:    67] Volume::_PackagesEntryRemoved("docker_haiku-1.0.2-1-x86_64.hpkg")
+KERN: package_daemon: [30928199751:    67] Volume::_PackagesEntryCreated("docker_haiku-1.0.2-1-x86_64.hpkg")
+KERN: package_daemon: [30928199762:    67] node monitoring created event for already known entry "docker_haiku-1.0.2-1-x86_64.hpkg"
+AUTH 'sshd'[64253]: error: Bind to port 2223 on 0.0.0.0 failed: Address already in use.
+AUTH 'sshd'[64253]: fatal: Cannot bind any address.
+AUTH 'sshd'[127]: drop connection #25 from [127.0.0.1]:39769 on [127.0.0.1]:22 Maxstartups
+AUTH 'sshd-session'[64377]: Invalid user root from 127.0.0.1 port 39752
+AUTH 'sshd-session'[64377]: Failed none for invalid user root from 127.0.0.1 port 39752 ssh2
+AUTH 'sshd-session'[64377]: Failed password for invalid user root from 127.0.0.1 port 39752 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[64377]: Connection closed by invalid user root 127.0.0.1 port 39752 [preauth]
+AUTH 'sshd-session'[64378]: Invalid user root from 127.0.0.1 port 39792
+AUTH 'sshd-session'[64378]: Failed none for invalid user root from 127.0.0.1 port 39792 ssh2
+AUTH 'sshd-session'[64378]: Failed password for invalid user root from 127.0.0.1 port 39792 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[64378]: Connection closed by invalid user root 127.0.0.1 port 39792 [preauth]
+AUTH 'sshd'[127]: drop connection #30 from [127.0.0.1]:39890 on [127.0.0.1]:22 Maxstartups
+AUTH 'sshd-session'[64392]: Invalid user root from 127.0.0.1 port 39827
+AUTH 'sshd-session'[64392]: Failed none for invalid user root from 127.0.0.1 port 39827 ssh2
+AUTH 'sshd-session'[64392]: Failed password for invalid user root from 127.0.0.1 port 39827 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[64391]: Invalid user root from 127.0.0.1 port 39802
+AUTH 'sshd-session'[64392]: Connection closed by invalid user root 127.0.0.1 port 39827 [preauth]
+AUTH 'sshd-session'[64391]: Failed none for invalid user root from 127.0.0.1 port 39802 ssh2
+AUTH 'sshd-session'[64391]: Failed password for invalid user root from 127.0.0.1 port 39802 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[64391]: Connection closed by invalid user root 127.0.0.1 port 39802 [preauth]
+AUTH 'sshd-session'[64396]: Invalid user root from 127.0.0.1 port 39880
+AUTH 'sshd-session'[64396]: Failed none for invalid user root from 127.0.0.1 port 39880 ssh2
+AUTH 'sshd-session'[64396]: Failed password for invalid user root from 127.0.0.1 port 39880 ssh2
+AUTH 'sshd-session'[64393]: Invalid user root from 127.0.0.1 port 39854
+AUTH 'sshd-session'[64396]: Failed password for invalid user root from 127.0.0.1 port 39880 ssh2
+AUTH 'sshd-session'[64393]: Failed none for invalid user root from 127.0.0.1 port 39854 ssh2
+AUTH 'sshd-session'[64396]: Connection closed by invalid user root 127.0.0.1 port 39880 [preauth]
+AUTH 'sshd-session'[64393]: Failed password for invalid user root from 127.0.0.1 port 39854 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[64393]: Connection closed by invalid user root 127.0.0.1 port 39854 [preauth]
+AUTH 'sshd'[127]: drop connection #30 from [127.0.0.1]:39904 on [127.0.0.1]:22 Maxstartups
+AUTH 'sshd'[127]: drop connection #31 from [127.0.0.1]:39945 on [127.0.0.1]:22 Maxstartups
+AUTH 'sshd-session'[64406]: Invalid user root from 127.0.0.1 port 39918
+AUTH 'sshd-session'[64406]: Failed none for invalid user root from 127.0.0.1 port 39918 ssh2
+AUTH 'sshd-session'[64406]: Failed password for invalid user root from 127.0.0.1 port 39918 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[64406]: Connection closed by invalid user root 127.0.0.1 port 39918 [preauth]
+AUTH 'sshd'[127]: drop connection #31 from [127.0.0.1]:39974 on [127.0.0.1]:22 Maxstartups
+AUTH 'sshd-session'[64415]: Invalid user root from 127.0.0.1 port 39990
+AUTH 'sshd-session'[64415]: Failed none for invalid user root from 127.0.0.1 port 39990 ssh2
+AUTH 'sshd-session'[64415]: Failed password for invalid user root from 127.0.0.1 port 39990 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[64415]: Connection closed by invalid user root 127.0.0.1 port 39990 [preauth]
+AUTH 'sshd-session'[64438]: Accepted publickey for user from 127.0.0.1 port 40097 ssh2: ED25519 SHA256:I/FSdGHhqyvvr9ngKPkexXImkzcBS8Gn9izn6As2lYQ
+AUTH 'sshd-session'[64547]: Invalid user root from 127.0.0.1 port 40550
+AUTH 'sshd-session'[64547]: Failed none for invalid user root from 127.0.0.1 port 40550 ssh2
+AUTH 'sshd-session'[64547]: Failed password for invalid user root from 127.0.0.1 port 40550 ssh2
+Last message repeated 1 time
+AUTH 'sshd-session'[64547]: Connection closed by invalid user root 127.0.0.1 port 40550 [preauth]
+AUTH 'sshd-session'[64443]: Connection closed by 127.0.0.1 port 40097
+AUTH 'sshd'[64709]: error: Bind to port 2223 on 0.0.0.0 failed: Address already in use.
+AUTH 'sshd'[64709]: fatal: Cannot bind any address.
+KERN: package_daemon: [31037862208:    67] Volume::_PackagesEntryRemoved("docker_haiku-1.0.2-1-x86_64.hpkg")
+KERN: package_daemon: [31037869549:    67] CommitTransactionHandler::_ChangePackageActivation(): activating 0, deactivating 1 packages
+KERN: unknown: [31037869690:    67] Volume::_ChangeActivation(): 0 new packages, 1 old packages
+KERN: unknown: [31037869832:    67] package "docker_haiku-1.0.2-1-x86_64.hpkg" deactivated
+KERN: package_daemon: [31039955808:    67] Volume::_PackagesEntryCreated("docker_haiku-1.0.2-1-x86_64.hpkg")
+KERN: package_daemon: [31041629699:    67] CommitTransactionHandler::_ChangePackageActivation(): activating 1, deactivating 0 packages
+KERN: unknown: [31041629809:    67] Volume::_ChangeActivation(): 1 new packages, 0 old packages
+KERN: unknown: [31041630438:    67] package "docker_haiku-1.0.2-1-x86_64.hpkg" activated
+AUTH 'sshd-session'[64833]: Accepted publickey for user from 127.0.0.1 port 41980 ssh2: ED25519 SHA256:I/FSdGHhqyvvr9ngKPkexXImkzcBS8Gn9izn6As2lYQ
+AUTH 'sshd-session'[64836]: Connection closed by 127.0.0.1 port 41980
+AUTH 'sshd'[64890]: error: Bind to port 2223 on 0.0.0.0 failed: Address already in use.
+AUTH 'sshd'[64890]: fatal: Cannot bind any address.
+AUTH 'sshd-session'[64978]: Accepted publickey for user from 127.0.0.1 port 42615 ssh2: ED25519 SHA256:I/FSdGHhqyvvr9ngKPkexXImkzcBS8Gn9izn6As2lYQ
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:63712 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[65027]: Accepted publickey for user from 192.168.0.196 port 63716 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[65029]: Received disconnect from 192.168.0.196 port 63716:11: disconnected by user
+AUTH 'sshd-session'[65029]: Disconnected from user user 192.168.0.196 port 63716
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:63717 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[65034]: Accepted publickey for user from 192.168.0.196 port 63720 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+KERN: package_daemon: [32199506375:    67] CommitTransactionHandler::_ChangePackageActivation(): activating 6, deactivating 0 packages
+KERN: unknown: [32199506600:    67] Volume::_ChangeActivation(): 6 new packages, 0 old packages
+KERN: unknown: [32199575045:    67] package "media_helpers-0.1-1-x86_64.hpkg" activated
+KERN: unknown: [32199575182:    67] package "libevent-2.1.13-1-x86_64.hpkg" activated
+KERN: unknown: [32199575259:    67] package "nspr-4.39-1-x86_64.hpkg" activated
+KERN: unknown: [32199575351:    67] package "cairo-1.18.4-2-x86_64.hpkg" activated
+KERN: unknown: [32199576436:    67] package "firefox-157.0.1-2-x86_64.hpkg" activated
+KERN: unknown: [32199576963:    67] package "nss-3.129-1-x86_64.hpkg" activated
+KERN: package_daemon: [32200006768:    67] Volume::_PackagesEntryCreated("media_helpers-0.1-1-x86_64.hpkg")
+KERN: package_daemon: [32200006789:    67] Volume::_PackagesEntryCreated("nspr-4.39-1-x86_64.hpkg")
+KERN: package_daemon: [32200006791:    67] Volume::_PackagesEntryCreated("libevent-2.1.13-1-x86_64.hpkg")
+KERN: package_daemon: [32200006792:    67] Volume::_PackagesEntryCreated("cairo-1.18.4-2-x86_64.hpkg")
+KERN: package_daemon: [32200006793:    67] Volume::_PackagesEntryCreated("nss-3.129-1-x86_64.hpkg")
+KERN: package_daemon: [32200006795:    67] Volume::_PackagesEntryCreated("firefox-157.0.1-2-x86_64.hpkg")
+KERN: slab memory manager: created area 0xffffffff94801000 (5477960)
+KERN: runtime_loader: Cannot open file libavcodec.so.63 (needed by /boot/system/lib/libnspr4.so): No such file or directory
+KERN: runtime_loader: Cannot open file libavcodec.so.62 (needed by /boot/system/lib/libnspr4.so): No such file or directory
+KERN: runtime_loader: Cannot open file libavcodec.so.61 (needed by /boot/system/lib/libnspr4.so): No such file or directory
+KERN: slab memory manager: created area 0xffffffff95001000 (5480802)
+KERN: runtime_loader: Cannot open file /boot/system/apps/Firefox/lib/libonnxruntime.so (needed by /boot/system/lib/libnspr4.so): No such file or directory
+KERN: slab memory manager: created area 0xffffffff95801000 (5484480)
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: normal -> note
+KERN: low resource pages: note -> normal
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: critical -> note
+KERN: low resource pages: critical -> normal
+Last message repeated 1 time
+KERN: low resource pages: normal -> note
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: critical -> note
+Last message repeated 1 time
+KERN: low resource memory: normal -> note
+KERN: low resource pages: critical -> note
+KERN: low resource memory: note -> normal
+KERN: low resource pages: critical -> note
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: critical -> note
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: critical -> note
+KERN: Last message repeated 2 times.
+KERN: low resource pages: note -> normal
+KERN: low resource pages: critical -> note
+KERN: Last message repeated 5 times.
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: normal -> note
+KERN: low resource pages: critical -> note
+KERN: Last message repeated 3 times.
+KERN: low resource pages: note -> normal
+KERN: low resource pages: critical -> note
+KERN: Last message repeated 3 times.
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: critical -> note
+KERN: low resource pages: note -> normal
+KERN: low resource pages: critical -> note
+KERN: low resource pages: note -> normal
+KERN: low resource pages: normal -> note
+KERN: low resource pages: critical -> note
+KERN: low resource pages: critical -> warning
+KERN: low resource pages: critical -> normal
+Last message repeated 1 time
+KERN: low resource pages: critical -> note
+KERN: Last message repeated 6 times.
+KERN: low resource pages: critical -> normal
+Last message repeated 1 time
+KERN: low resource pages: critical -> note
+Last message repeated 1 time
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: normal -> note
+KERN: low resource pages: critical -> note
+KERN: low resource pages: note -> normal
+KERN: low resource pages: critical -> warning
+KERN: low resource pages: critical -> note
+KERN: Last message repeated 2 times.
+KERN: low resource pages: critical -> warning
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: normal -> note
+KERN: low resource pages: note -> normal
+KERN: low resource pages: normal -> note
+KERN: low resource pages: critical -> note
+KERN: low resource pages: note -> normal
+KERN: low resource pages: critical -> note
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: critical -> note
+Last message repeated 1 time
+KERN: low resource pages: critical -> normal
+KERN: low resource pages: critical -> note
+KERN: low resource pages: note -> normal
+KERN: low resource pages: normal -> note
+KERN: low resource pages: critical -> note
+KERN: Last message repeated 3 times.
+KERN: low resource pages: critical -> normal
+KERN: runtime_loader: Cannot open file libcurl.so (needed by /boot/system/apps/Firefox/pingsender): No such file or directory
+KERN: Last message repeated 2 times.

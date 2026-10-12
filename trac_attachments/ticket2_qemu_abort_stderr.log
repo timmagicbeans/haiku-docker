@@ -1,0 +1,13 @@
+NetBSD Virtual Machine Monitor accelerator is operational
+</boot/system/lib/libnvmm.so> nvmm_gpa_unmap.cold + 0
+</boot/system/bin/qemu-system-x86_64> nvmm_process_section + 0xe5
+</boot/system/bin/qemu-system-x86_64> address_space_update_topology_pass + 0x2e2
+</boot/system/bin/qemu-system-x86_64> address_space_set_flatview + 0xbf
+</boot/system/bin/qemu-system-x86_64> memory_region_transaction_commit + 0x130
+</boot/system/bin/qemu-system-x86_64> pc_memory_init + 0x187
+</boot/system/bin/qemu-system-x86_64> pc_init1.constprop.0 + 0x1c1
+</boot/system/bin/qemu-system-x86_64> machine_run_board_init + 0x254
+</boot/system/bin/qemu-system-x86_64> qmp_x_exit_preconfig + 0x55
+</boot/system/bin/qemu-system-x86_64> qemu_init + 0x3c87
+</boot/system/bin/qemu-system-x86_64> main + 0x9
+Abort

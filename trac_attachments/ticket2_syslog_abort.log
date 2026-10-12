@@ -1,0 +1,60 @@
+KERN: low resource pages: critical -> normal
+KERN: runtime_loader: Cannot open file libcurl.so (needed by /boot/system/apps/Firefox/pingsender): No such file or directory
+KERN: Last message repeated 2 times.
+AUTH 'sshd-session'[65036]: Received disconnect from 192.168.0.196 port 63720:11: disconnected by user
+AUTH 'sshd-session'[65036]: Disconnected from user user 192.168.0.196 port 63720
+AUTH 'sshd-session'[66000]: Accepted publickey for user from 192.168.0.196 port 50196 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:50201 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[66007]: Accepted publickey for user from 192.168.0.196 port 50210 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[66009]: Received disconnect from 192.168.0.196 port 50210:11: disconnected by user
+AUTH 'sshd-session'[66009]: Disconnected from user user 192.168.0.196 port 50210
+AUTH 'sshd-session'[66011]: Accepted publickey for user from 192.168.0.196 port 50211 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[66024]: Accepted publickey for user from 192.168.0.196 port 50216 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[66026]: Received disconnect from 192.168.0.196 port 50216:11: disconnected by user
+AUTH 'sshd-session'[66026]: Disconnected from user user 192.168.0.196 port 50216
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:50218 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[66028]: Accepted publickey for user from 192.168.0.196 port 50224 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[66044]: Accepted publickey for user from 192.168.0.196 port 50227 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[66046]: Received disconnect from 192.168.0.196 port 50227:11: disconnected by user
+AUTH 'sshd-session'[66046]: Disconnected from user user 192.168.0.196 port 50227
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:50236 on [192.168.0.169]:22 Maxstartups
+AUTH 'sshd-session'[66057]: Accepted publickey for user from 192.168.0.196 port 50238 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd-session'[66030]: Connection closed by 192.168.0.196 port 50224
+KERN: 66068: DEBUGGER: abort() called
+KERN: debug_server: Thread 66068 entered the debugger: Debugger call: `abort() called'
+KERN: stack trace, current PC 0x3fcc63269  </boot/system/lib/libroot.so> _kern_debugger + 0x9:
+KERN:   (0x7f632e509770)  0x15183fed0d5  </boot/system/lib/libnvmm.so> nvmm_gpa_unmap.cold + 0
+KERN:   (0x7f632e5097f0)  0x16e4645f035  </boot/system/bin/qemu-system-x86_64> nvmm_process_section + 0xe5
+KERN:   (0x7f632e509840)  0x16e46512c62  </boot/system/bin/qemu-system-x86_64> address_space_update_topology_pass + 0x2e2
+KERN:   (0x7f632e5098f0)  0x16e4651304f  </boot/system/bin/qemu-system-x86_64> address_space_set_flatview + 0xbf
+KERN:   (0x7f632e509960)  0x16e46516d00  </boot/system/bin/qemu-system-x86_64> memory_region_transaction_commit + 0x130
+KERN:   (0x7f632e509980)  0x16e46488ea7  </boot/system/bin/qemu-system-x86_64> pc_memory_init + 0x187
+KERN:   (0x7f632e509a00)  0x16e46470b01  </boot/system/bin/qemu-system-x86_64> pc_init1.constprop.0 + 0x1c1
+KERN:   (0x7f632e509ac0)  0x16e462824a4  </boot/system/bin/qemu-system-x86_64> machine_run_board_init + 0x254
+KERN:   (0x7f632e509bd0)  0x16e463f5665  </boot/system/bin/qemu-system-x86_64> qmp_x_exit_preconfig + 0x55
+KERN:   (0x7f632e509c20)  0x16e463f96b7  </boot/system/bin/qemu-system-x86_64> qemu_init + 0x3c87
+KERN:   (0x7f632e509d70)  0x16e462136e9  </boot/system/bin/qemu-system-x86_64> main + 0x9
+KERN:   (0x7f632e509d80)  0x16e4621505e  </boot/system/bin/qemu-system-x86_64> _start + 0x3e
+KERN:   (0x7f632e509db0)  0xbad726b4c5  </boot/system/runtime_loader> runtime_loader + 0x115
+KERN: low resource memory: note -> normal
+AUTH 'sshd-session'[66002]: Received disconnect from 192.168.0.196 port 50196:11: disconnected by user
+AUTH 'sshd-session'[66002]: Disconnected from user user 192.168.0.196 port 50196
+AUTH 'sshd-session'[66013]: Received disconnect from 192.168.0.196 port 50211:11: disconnected by user
+AUTH 'sshd-session'[66013]: Disconnected from user user 192.168.0.196 port 50211
+KERN: 66137: DEBUGGER: abort() called
+KERN: debug_server: Thread 66137 entered the debugger: Debugger call: `abort() called'
+KERN: stack trace, current PC 0xb031593269  </boot/system/lib/libroot.so> _kern_debugger + 0x9:
+KERN:   (0x7fc59fcdabe0)  0x1d1ef84e0d5  </boot/system/lib/libnvmm.so> nvmm_gpa_unmap.cold + 0
+KERN:   (0x7fc59fcdac60)  0x39284ea035  </boot/system/bin/qemu-system-x86_64> nvmm_process_section + 0xe5
+KERN:   (0x7fc59fcdacb0)  0x392859dc62  </boot/system/bin/qemu-system-x86_64> address_space_update_topology_pass + 0x2e2
+KERN:   (0x7fc59fcdad60)  0x392859e04f  </boot/system/bin/qemu-system-x86_64> address_space_set_flatview + 0xbf
+KERN:   (0x7fc59fcdadd0)  0x39285a1d00  </boot/system/bin/qemu-system-x86_64> memory_region_transaction_commit + 0x130
+KERN:   (0x7fc59fcdadf0)  0x3928513ea7  </boot/system/bin/qemu-system-x86_64> pc_memory_init + 0x187
+KERN:   (0x7fc59fcdae70)  0x39284fbb01  </boot/system/bin/qemu-system-x86_64> pc_init1.constprop.0 + 0x1c1
+KERN:   (0x7fc59fcdaf30)  0x392830d4a4  </boot/system/bin/qemu-system-x86_64> machine_run_board_init + 0x254
+KERN:   (0x7fc59fcdb040)  0x3928480665  </boot/system/bin/qemu-system-x86_64> qmp_x_exit_preconfig + 0x55
+KERN:   (0x7fc59fcdb090)  0x39284846b7  </boot/system/bin/qemu-system-x86_64> qemu_init + 0x3c87
+KERN:   (0x7fc59fcdb1e0)  0x392829e6e9  </boot/system/bin/qemu-system-x86_64> main + 0x9
+KERN:   (0x7fc59fcdb1f0)  0x39282a005e  </boot/system/bin/qemu-system-x86_64> _start + 0x3e
+KERN:   (0x7fc59fcdb220)  0x12bc1d734c5  </boot/system/runtime_loader> runtime_loader + 0x115
+KERN: low resource memory: note -> normal

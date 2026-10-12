@@ -9,7 +9,7 @@
 ---
 
 ### Ticket 1: Linux guest (6.18) crashes in fpstate_reset without noxsave under NVMM
-* **Component:** `Drivers/Misc` (or `Drivers/dev/misc/nvmm`)
+* **Component:** `Drivers/Misc` (or `System/Kernel`)
 * **Type:** `bug`
 * **Summary:** Linux guest kernel (6.18) crashes during early boot initialization of extended FPU features unless `noxsave` is passed on the command line.
 * **Reproduction Steps:**
@@ -57,9 +57,11 @@
       </TASK>
      Kernel panic - not syncing: Attempted to kill the idle task!
      ```
-  3. Note on versions: Linux kernel 6.6 reached initramfs userspace without `noxsave` (no FPU panic), whereas 6.18 reliably reproduces this panic.
-  4. Appending `noxsave` to the guest kernel command line: Linux 6.18 boots cleanly to userspace.
-* **Impact:** Guest runtimes requiring AVX/AVX2 instruction sets fail to run.
+  3. **Version comparison:** Linux kernel 6.6 reached initramfs userspace without `noxsave` (no FPU panic), whereas 6.18 reliably reproduces this panic.
+  4. **Root-cause hint for developers:**
+     The faulting instruction opcode `48 89 47 10` is `mov %rax,0x10(%rdi)`. The page fault occurs with `RDI=0` (`CR2=0x10`), indicating that a pointer to `fpstate` is `NULL`. In Linux 6.18, `fpu__init_system_early_generic` calculates the buffer size and state offsets based on XSAVE CPUID leaf `0xD`. NVMM likely reports an unexpected or unhandled CPUID leaf `0xD` feature mask or size value, leading the kernel to skip allocation or miscalculate the initial fpstate buffer.
+  5. **Workaround:** Appending `noxsave` to the guest kernel command line bypasses XSAVE initialization and boots Linux 6.18 cleanly to userspace.
+* **Impact:** Guest runtimes requiring AVX/AVX2 instruction sets cannot function.
 * **Attachments:**
   - `ticket1_kernel_panic.log` (Full guest serial console output until panic)
   - `haiku_syslog_sample.log` (Host syslog during run)
@@ -67,9 +69,9 @@
 ---
 
 ### Ticket 2: Abort in `nvmm_gpa_unmap` during memory setup / unmap under SMP and default machine configs
-* **Component:** `Drivers/Misc`
+* **Component:** `Drivers/Misc` (or `System/Kernel`)
 * **Type:** `bug`
-* **Summary:** QEMU aborts in `nvmm_gpa_unmap` when SMP (`-smp 2`) and default PC machine ROM/SMM regions are present.
+* **Summary:** QEMU aborts in `nvmm_gpa_unmap` during flatview topology commit when SMP (`-smp 2`) and default PC machine configuration are used.
 * **Reproduction Steps:**
   1. Launch QEMU with NVMM accelerator using SMP and standard PC machine:
      ```sh
@@ -81,27 +83,38 @@
        -kernel /boot/home/config/settings/docker-vm/vmlinuz-virt \
        -initrd /boot/home/config/settings/docker-vm/initramfs-virt \
        -append "console=ttyS0 noxsave" \
-       -serial stdio
+       -serial stdio -display none
      ```
-  2. QEMU aborts with the following trace in stderr:
+  2. QEMU immediately aborts with the following stack trace in Haiku syslog / stderr:
      ```text
-     </boot/system/lib/libnvmm.so> nvmm_gpa_unmap.cold + 0
-     </boot/system/bin/qemu-system-x86_64> nvmm_process_section + 0xe5
-     qemu: qemu_cond_wait_impl: Operation not allowed -> Abort
+     KERN: debug_server: Thread 66137 entered the debugger: Debugger call: `abort() called'
+     KERN: stack trace, current PC 0xb031593269 </boot/system/lib/libroot.so> _kern_debugger + 0x9:
+     KERN:   (0x7fc59fcdabe0)  0x1d1ef84e0d5  </boot/system/lib/libnvmm.so> nvmm_gpa_unmap.cold + 0
+     KERN:   (0x7fc59fcdac60)  0x39284ea035   </boot/system/bin/qemu-system-x86_64> nvmm_process_section + 0xe5
+     KERN:   (0x7fc59fcdacb0)  0x392859dc62   </boot/system/bin/qemu-system-x86_64> address_space_update_topology_pass + 0x2e2
+     KERN:   (0x7fc59fcdad60)  0x392859e04f   </boot/system/bin/qemu-system-x86_64> address_space_set_flatview + 0xbf
+     KERN:   (0x7fc59fcdadd0)  0x39285a1d00   </boot/system/bin/qemu-system-x86_64> memory_region_transaction_commit + 0x130
+     KERN:   (0x7fc59fcdadf0)  0x3928513ea7   </boot/system/bin/qemu-system-x86_64> pc_memory_init + 0x187
+     KERN:   (0x7fc59fcdae70)  0x39284fbb01   </boot/system/bin/qemu-system-x86_64> pc_init1.constprop.0 + 0x1c1
+     KERN:   (0x7fc59fcdaf30)  0x392830d4a4   </boot/system/bin/qemu-system-x86_64> machine_run_board_init + 0x254
+     KERN:   (0x7fc59fcdb040)  0x3928480665   </boot/system/bin/qemu-system-x86_64> qmp_x_exit_preconfig + 0x55
+     KERN:   (0x7fc59fcdb090)  0x39284846b7   </boot/system/bin/qemu-system-x86_64> qemu_init + 0x3c87
+     KERN:   (0x7fc59fcdb1e0)  0x392829e6e9   </boot/system/bin/qemu-system-x86_64> main + 0x9
      ```
-* **Observed Behavior & Workaround:** Running with `-smp 1`, `-machine pc,smm=off`, `-nodefaults`, and `-vga none` avoids the ROM/SMM remapping and unmap crash. Not yet isolated which of these factors triggers the abort.
+* **Observed Behavior & Workaround:** Running with `-smp 1`, `-machine pc,smm=off`, `-nodefaults`, and `-vga none` avoids the abort during flatview topology commit. Not yet isolated which of these factors triggers the abort.
 * **Attachments:**
   - `ticket2_qemu_abort_stderr.log` (QEMU standard error with stack trace)
-  - `haiku_syslog_sample.log` (Host kernel syslog)
+  - `ticket2_syslog_abort.log` (Host kernel syslog showing thread abort and stack trace)
 
 ---
 
 ### Ticket 3: Physical memory descriptor leak upon abnormal QEMU termination (`kill -9`)
-* **Component:** `Drivers/Misc`
+* **Component:** `Drivers/Misc` (or `System/Kernel`)
 * **Type:** `bug`
 * **Summary:** Terminating QEMU via `SIGKILL` leaks guest physical memory mappings in the NVMM kernel driver until host reboot.
 * **Reproduction Steps:**
-  1. Start QEMU with NVMM:
+  1. Fresh boot of Haiku host.
+  2. Start QEMU with `-accel nvmm`:
      ```sh
      qemu-system-x86_64 \
        -accel nvmm \
@@ -118,13 +131,13 @@
        -initrd /boot/home/config/settings/docker-vm/initramfs-virt \
        -append "console=ttyS0 noxsave"
      ```
-  2. Kill the process abnormally: `kill -9 <qemu_pid>`.
-  3. Attempt to start QEMU again: NVMM fails to allocate/map host physical memory, emitting:
+  3. Abruptly kill the process: `kill -9 <qemu_pid>`.
+  4. Start the same command again $\to$ QEMU fails immediately with:
      ```text
      NVMM: Failed to map HVA, HostVA:0x93f8d70000 Size:0x10000000 bytes, error=2147454976
      ```
-     Subsequent allocations fail with `ENOMEM` / `0x7fff9000` until the Haiku host machine is rebooted.
-  4. Compare with graceful shutdown (`poweroff` in guest or ACPI/QMP `quit`): memory is cleanly reclaimed and returned to Haiku (`sysinfo -mem`).
-* **Observed Behavior & Workaround:** Clean shutdown completely avoids the leak. Suspected cause: lack of cleanup hook in `/dev/misc/nvmm` on abnormal process termination (`device_close`).
+     Subsequent allocations fail with `ENOMEM` / `0x7fff9000` until host reboot.
+  5. Reboot Haiku host $\to$ launch works normally again.
+* **Observed Behavior & Workaround:** Clean shutdown (`poweroff` in guest, ACPI/QMP `quit`, or SIGTERM) cleanly releases memory mappings back to Haiku (`sysinfo -mem`). Suspected cause: lack of cleanup handler in `/dev/misc/nvmm` when a process fd is forcibly closed on `SIGKILL`.
 * **Attachments:**
   - `haiku_syslog_sample.log` (Syslog showing NVMM HVA mapping error)

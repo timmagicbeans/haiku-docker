@@ -1,0 +1,260 @@
+[    0.000000] Linux version 6.18.55-0-virt (buildozer@build-3-24-x86_64) (cc (Alpine 15.2.0) 15.2.0, GNU ld (GNU Binutils) 2.45.1) #1-Alpine SMP PREEMPT_DYNAMIC 2026-10-05 07:32:06
+[    0.000000] Command line: console=ttyS0 root=/dev/vda1 rw rootfstype=ext4
+[    0.000000] x86 CPU feature dependency check failure: CPU0 has 'fma' enabled but 'avx' disabled. Kernel might be fine, but no guarantees.
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000001ffd9fff] usable
+[    0.000000] BIOS-e820: [mem 0x000000001ffda000-0x000000001fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x000000fd00000000-0x000000ffffffffff] reserved
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] APIC: Static calls initialized
+[    0.000000] SMBIOS 3.0.0 present.
+[    0.000000] DMI: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[    0.000000] DMI: Memory slots populated: 1/1
+[    0.000000] tsc: Fast TSC calibration failed
+[    0.000000] last_pfn = 0x1ffda max_arch_pfn = 0x400000000
+[    0.000000] MTRRs disabled by BIOS
+[    0.000000] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+[    0.000000] found SMP MP-table at [mem 0x000f5470-0x000f547f]
+[    0.000000] Using GB pages for direct mapping
+[    0.000000] RAMDISK: [mem 0x1f5b6000-0x1ffcffff]
+[    0.000000] ACPI: Early table checksum verification disabled
+[    0.000000] ACPI: RSDP 0x00000000000F5290 000014 (v00 BOCHS )
+[    0.000000] ACPI: RSDT 0x000000001FFE1C23 000034 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: FACP 0x000000001FFE1AD7 000074 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: DSDT 0x000000001FFE0040 001A97 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: FACS 0x000000001FFE0000 000040
+[    0.000000] ACPI: APIC 0x000000001FFE1B4B 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: HPET 0x000000001FFE1BC3 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: WAET 0x000000001FFE1BFB 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: Reserving FACP table memory at [mem 0x1ffe1ad7-0x1ffe1b4a]
+[    0.000000] ACPI: Reserving DSDT table memory at [mem 0x1ffe0040-0x1ffe1ad6]
+[    0.000000] ACPI: Reserving FACS table memory at [mem 0x1ffe0000-0x1ffe003f]
+[    0.000000] ACPI: Reserving APIC table memory at [mem 0x1ffe1b4b-0x1ffe1bc2]
+[    0.000000] ACPI: Reserving HPET table memory at [mem 0x1ffe1bc3-0x1ffe1bfa]
+[    0.000000] ACPI: Reserving WAET table memory at [mem 0x1ffe1bfb-0x1ffe1c22]
+[    0.000000] No NUMA configuration found
+[    0.000000] Faking a node at [mem 0x0000000000000000-0x000000001ffd9fff]
+[    0.000000] NODE_DATA(0) allocated [mem 0x1ffd5d40-0x1ffd9fff]
+[    0.000000] Zone ranges:
+[    0.000000]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.000000]   DMA32    [mem 0x0000000001000000-0x000000001ffd9fff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000001000-0x000000000009efff]
+[    0.000000]   node   0: [mem 0x0000000000100000-0x000000001ffd9fff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000001000-0x000000001ffd9fff]
+[    0.000000] On node 0, zone DMA: 1 pages in unavailable ranges
+[    0.000000] On node 0, zone DMA: 97 pages in unavailable ranges
+[    0.000000] On node 0, zone DMA32: 38 pages in unavailable ranges
+[    0.000000] ACPI: PM-Timer IO Port: 0x608
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+[    0.000000] IOAPIC[0]: apic_id 0, version 32, address 0xfec00000, GSI 0-23
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+[    0.000000] ACPI: Using ACPI (MADT) for SMP configuration information
+[    0.000000] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.000000] CPU topo: Max. logical packages:   1
+[    0.000000] CPU topo: Max. logical dies:       1
+[    0.000000] CPU topo: Max. dies per package:   1
+[    0.000000] CPU topo: Max. threads per core:   1
+[    0.000000] CPU topo: Num. cores per package:     1
+[    0.000000] CPU topo: Num. threads per package:   1
+[    0.000000] CPU topo: Allowing 1 present CPUs plus 0 hotplug CPUs
+[    0.000000] [mem 0x20000000-0xfffbffff] available for PCI devices
+[    0.000000] Booting paravirtualized kernel on bare hardware
+[    0.000000] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+[    0.000000] setup_percpu: NR_CPUS:256 nr_cpumask_bits:1 nr_cpu_ids:1 nr_node_ids:1
+[    0.000000] percpu: Embedded 55 pages/cpu s186200 r8192 d30888 u2097152
+[    0.000000] Kernel command line: console=ttyS0 root=/dev/vda1 rw rootfstype=ext4
+[    0.000000] random: crng init done
+[    0.000000] printk: log buffer data + meta data: 131072 + 458752 = 589824 bytes
+[    0.000000] Dentry cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.000000] Fallback order for Node 0: 0 
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 130936
+[    0.000000] Policy zone: DMA32
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:on, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] Kernel/User page tables isolation: enabled
+[    0.000000] Dynamic Preempt: none
+[    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=1.
+[    0.000000] 	Trampoline variant of Tasks RCU enabled.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 16640, nr_irqs: 256, preallocated irqs: 16
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.000000] kfence: initialized - using 2097152 bytes for 255 objects at 0x(____ptrval____)-0x(____ptrval____)
+[    0.000000] Console: colour *CGA 80x25
+[    0.000000] printk: legacy console [ttyS0] enabled
+[    0.000000] ACPI: Core revision 20250807
+[    0.000000] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+[    0.001000] APIC: Switch to symmetric I/O mode setup
+[    0.058000] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.060000] ..MP-BIOS bug: 8254 timer not connected to IO-APIC
+[    0.060000] ...trying to set up timer (IRQ0) through the 8259A ...
+[    0.060000] ..... (found apic 0 pin 2) ...
+[    0.063000] ....... failed.
+[    0.063000] ...trying to set up timer as Virtual Wire IRQ...
+[    0.071000] ..... works.
+[    0.079000] tsc: Unable to calibrate against PIT
+[    0.081000] tsc: HPET/PMTIMER calibration failed
+[    0.083000] tsc: Marking TSC unstable due to could not calculate TSC khz
+[    0.085000] Calibrating delay loop... 34619.39 BogoMIPS (lpj=17309696)
+[    0.147000] x86/cpu: User Mode Instruction Prevention (UMIP) activated
+[    0.149000] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+[    0.151000] Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+[    0.154000] mitigations: Enabled attack vectors: user_kernel, user_user, guest_host, guest_guest, SMT mitigations: auto
+[    0.156000] Speculative Store Bypass: Vulnerable
+[    0.158000] SRBDS: Unknown: Dependent on hypervisor status
+[    0.161000] Spectre V2 : Mitigation: Retpolines
+[    0.163000] RETBleed: Vulnerable
+[    0.167000] ITS: Mitigation: Aligned branch/return thunks
+[    0.169000] MDS: Mitigation: Clear CPU buffers
+[    0.171000] MMIO Stale Data: Vulnerable: Clear CPU buffers attempted, no microcode
+[    0.173000] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    0.176000] Spectre V2 : Spectre v2 / SpectreRSB: Filling RSB on context switch and VMEXIT
+[    0.180000] active return thunk: its_return_thunk
+[    0.182000] ------------[ cut here ]------------
+[    0.184000] XSAVE consistency problem: size 576 != kernel_size 0
+[    0.186000] WARNING: CPU: 0 PID: 0 at arch/x86/kernel/fpu/xstate.c:638 fpu__init_system_xstate+0xfdc/0x1630
+[    0.188000] Modules linked in:
+[    0.190000] CPU: 0 UID: 0 PID: 0 Comm: swapper/0 Not tainted 6.18.55-0-virt #1-Alpine PREEMPT(none) 
+[    0.192000] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[    0.194000] RIP: 0010:fpu__init_system_xstate+0xfdc/0x1630
+[    0.196000] Code: c7 80 3d 3e 10 bb ff 00 0f 85 97 05 00 00 44 89 f2 89 de 48 c7 c7 78 ef 3e 97 49 c1 cf 10 c6 05 21 10 bb ff 01 e8 b4 4c 2e fe <0f> 0b e9 81 05 00 00 48 b8 c5 44 a7 fa ca 2f 9b 56 49 31 c7 48 b8
+[    0.198000] RSP: 0000:ffffffff97a03e18 EFLAGS: 00010246
+[    0.200000] RAX: 0000000000000000 RBX: 0000000000000240 RCX: 0000000000000000
+[    0.202000] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+[    0.205000] RBP: ffffffff97a03ea8 R08: 0000000000000000 R09: 0000000000000000
+[    0.207000] R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000001
+[    0.209000] R13: 0000000000000003 R14: 0000000000000000 R15: 77e31cdb9986f60a
+[    0.211000] FS:  0000000000000000(0000) GS:ffff9c8946757000(0000) knlGS:0000000000000000
+[    0.214000] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    0.216000] CR2: ffff9c88d4401000 CR3: 0000000013a36001 CR4: 0000000000370eb0
+[    0.218000] Call Trace:
+[    0.220000]  <TASK>
+[    0.222000]  fpu__init_system+0xd8/0x120
+[    0.224000]  arch_cpu_finalize_init+0x16f/0x290
+[    0.228000]  start_kernel+0x6f9/0x780
+[    0.231000]  x86_64_start_reservations+0x24/0x30
+[    0.234000]  x86_64_start_kernel+0xc7/0xd0
+[    0.236000]  common_startup_64+0x13b/0x148
+[    0.240000]  </TASK>
+[    0.242000] ---[ end trace 0000000000000000 ]---
+[    0.245000] CPUID[0d, 00]: eax=00000003 ebx=00000240 ecx=00000240 edx=00000000
+[    0.247000] CPUID[0d, 01]: eax=00000007 ebx=00000000 ecx=00000000 edx=00000000
+[    0.249000] CPUID[0d, 02]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.251000] CPUID[0d, 03]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.254000] CPUID[0d, 04]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.256000] CPUID[0d, 05]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.258000] CPUID[0d, 06]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.260000] CPUID[0d, 07]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.262000] CPUID[0d, 08]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.264000] CPUID[0d, 09]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.267000] CPUID[0d, 0a]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.270000] CPUID[0d, 0b]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.273000] CPUID[0d, 0c]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.275000] CPUID[0d, 0d]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.277000] CPUID[0d, 0e]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.279000] CPUID[0d, 0f]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.281000] CPUID[0d, 10]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.285000] CPUID[0d, 11]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.287000] CPUID[0d, 12]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.289000] CPUID[0d, 13]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.291000] CPUID[0d, 14]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.293000] CPUID[0d, 15]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.295000] CPUID[0d, 16]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.297000] CPUID[0d, 17]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.299000] CPUID[0d, 18]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.301000] CPUID[0d, 19]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.303000] CPUID[0d, 1a]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.305000] CPUID[0d, 1b]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.309000] CPUID[0d, 1c]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.311000] CPUID[0d, 1d]: eax=00000000 ebx=00000000 ecx=00000000 edx=00000000
+[    0.313000] x86/fpu: XSAVE disabled
+[    0.315000] ------------[ cut here ]------------
+[    0.317000] WARNING: CPU: 0 PID: 0 at arch/x86/kernel/fpu/core.c:62 x86_task_fpu+0x18/0x30
+[    0.319000] Modules linked in:
+[    0.321000] CPU: 0 UID: 0 PID: 0 Comm: swapper/0 Tainted: G        W           6.18.55-0-virt #1-Alpine PREEMPT(none) 
+[    0.323000] Tainted: [W]=WARN
+[    0.325000] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[    0.327000] RIP: 0010:x86_task_fpu+0x18/0x30
+[    0.329000] Code: 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 8d 87 00 1d 00 00 f6 47 2e 20 75 07 31 ff e9 c8 69 bb 00 <0f> 0b 31 c0 31 ff e9 bd 69 bb 00 66 90 66 66 2e 0f 1f 84 00 00 00
+[    0.333000] RSP: 0000:ffffffff97a03e10 EFLAGS: 00010202
+[    0.335000] RAX: ffffffff97a14640 RBX: b61d2b3b2616efb2 RCX: 0000000000000000
+[    0.337000] RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffff97a12940
+[    0.339000] RBP: ffffffff97a03ea8 R08: 0000000000000000 R09: 0000000000000000
+[    0.341000] R10: 0000000000000000 R11: 0000000000000000 R12: 0000020000000200
+[    0.344000] R13: 0000000000000246 R14: 0000000000000000 R15: 6140d616a8597dc3
+[    0.346000] FS:  0000000000000000(0000) GS:ffff9c8946757000(0000) knlGS:0000000000000000
+[    0.348000] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    0.351000] CR2: ffff9c88d4401000 CR3: 0000000013a36001 CR4: 0000000000330eb0
+[    0.354000] Call Trace:
+[    0.356000]  <TASK>
+[    0.358000]  fpu__init_system_xstate+0x1502/0x1630
+[    0.360000]  fpu__init_system+0xd8/0x120
+[    0.364000]  arch_cpu_finalize_init+0x16f/0x290
+[    0.366000]  start_kernel+0x6f9/0x780
+[    0.368000]  x86_64_start_reservations+0x24/0x30
+[    0.370000]  x86_64_start_kernel+0xc7/0xd0
+[    0.372000]  common_startup_64+0x13b/0x148
+[    0.374000]  </TASK>
+[    0.376000] ---[ end trace 0000000000000000 ]---
+[    0.378000] BUG: kernel NULL pointer dereference, address: 0000000000000010
+[    0.378000] #PF: supervisor write access in kernel mode
+[    0.378000] #PF: error_code(0x0002) - not-present page
+[    0.378000] PGD 0 P4D 0 
+[    0.378000] Oops: Oops: 0002 [#1] SMP PTI
+[    0.378000] CPU: 0 UID: 0 PID: 0 Comm: swapper/0 Tainted: G        W           6.18.55-0-virt #1-Alpine PREEMPT(none) 
+[    0.378000] Tainted: [W]=WARN
+[    0.378000] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[    0.378000] RIP: 0010:fpstate_reset+0x15/0x90
+[    0.378000] Code: 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 8d 47 40 48 8b 35 99 5b 21 01 8b 15 ef 5b 21 01 <48> 89 47 10 8b 05 81 5b 21 01 4c 8b 05 ea 5b 21 01 f6 47 60 02 74
+[    0.378000] RSP: 0000:ffffffff97a03e10 EFLAGS: 00010246
+[    0.378000] RAX: 0000000000000040 RBX: b61d2b3b2616efb2 RCX: 0000000000000000
+[    0.378000] RDX: 0000000000000200 RSI: 0000000000000003 RDI: 0000000000000000
+[    0.378000] RBP: ffffffff97a03ea8 R08: 0000000000000000 R09: 0000000000000000
+[    0.378000] R10: 0000000000000000 R11: 0000000000000000 R12: 0000020000000200
+[    0.378000] R13: 0000000000000246 R14: 0000000000000000 R15: 6140d616a8597dc3
+[    0.378000] FS:  0000000000000000(0000) GS:ffff9c8946757000(0000) knlGS:0000000000000000
+[    0.378000] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    0.378000] CR2: 0000000000000010 CR3: 0000000013a36001 CR4: 0000000000330eb0
+[    0.378000] Call Trace:
+[    0.378000]  <TASK>
+[    0.378000]  fpu__init_system_xstate+0x150a/0x1630
+[    0.378000]  fpu__init_system+0xd8/0x120
+[    0.378000]  arch_cpu_finalize_init+0x16f/0x290
+[    0.378000]  start_kernel+0x6f9/0x780
+[    0.378000]  x86_64_start_reservations+0x24/0x30
+[    0.378000]  x86_64_start_kernel+0xc7/0xd0
+[    0.378000]  common_startup_64+0x13b/0x148
+[    0.378000]  </TASK>
+[    0.378000] Modules linked in:
+[    0.378000] CR2: 0000000000000010
+[    0.378000] ---[ end trace 0000000000000000 ]---
+[    0.378000] RIP: 0010:fpstate_reset+0x15/0x90
+[    0.378000] Code: 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 8d 47 40 48 8b 35 99 5b 21 01 8b 15 ef 5b 21 01 <48> 89 47 10 8b 05 81 5b 21 01 4c 8b 05 ea 5b 21 01 f6 47 60 02 74
+[    0.378000] RSP: 0000:ffffffff97a03e10 EFLAGS: 00010246
+[    0.378000] RAX: 0000000000000040 RBX: b61d2b3b2616efb2 RCX: 0000000000000000
+[    0.378000] RDX: 0000000000000200 RSI: 0000000000000003 RDI: 0000000000000000
+[    0.378000] RBP: ffffffff97a03ea8 R08: 0000000000000000 R09: 0000000000000000
+[    0.378000] R10: 0000000000000000 R11: 0000000000000000 R12: 0000020000000200
+[    0.378000] R13: 0000000000000246 R14: 0000000000000000 R15: 6140d616a8597dc3
+[    0.378000] FS:  0000000000000000(0000) GS:ffff9c8946757000(0000) knlGS:0000000000000000
+[    0.378000] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    0.378000] CR2: 0000000000000010 CR3: 0000000013a36001 CR4: 0000000000330eb0
+[    0.378000] Kernel panic - not syncing: Attempted to kill the idle task!
+[    0.378000] ---[ end Kernel panic - not syncing: Attempted to kill the idle task! ]---

@@ -257,14 +257,14 @@ status_vm() {
     fi
 
     # Auxiliary background daemons
-    if [ -f "/port_daemon.pid" ] && kill -0 $(cat "/port_daemon.pid" 2>/dev/null) 2>/dev/null; then
-        echo "Port Daemon: active (PID $(cat "/port_daemon.pid"))"
+    if [ -f "$CONFIG_DIR/port_daemon.pid" ] && kill -0 $(cat "$CONFIG_DIR/port_daemon.pid" 2>/dev/null) 2>/dev/null; then
+        echo "Port Daemon: active (PID $(cat "$CONFIG_DIR/port_daemon.pid"))"
     else
         echo "Port Daemon: stopped"
     fi
 
-    if [ -f "/fs_bridge.pid" ] && kill -0 $(cat "/fs_bridge.pid" 2>/dev/null) 2>/dev/null; then
-        echo "FS Bridge:   active (PID $(cat "/fs_bridge.pid"))"
+    if [ -f "$CONFIG_DIR/fs_bridge.pid" ] && kill -0 $(cat "$CONFIG_DIR/fs_bridge.pid" 2>/dev/null) 2>/dev/null; then
+        echo "FS Bridge:   active (PID $(cat "$CONFIG_DIR/fs_bridge.pid"))"
     else
         echo "FS Bridge:   stopped"
     fi

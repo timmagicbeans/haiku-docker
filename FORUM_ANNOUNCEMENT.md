@@ -2,10 +2,10 @@
 
 Hi everyone,
 
-I'm excited to share **Haiku Docker v1.0.0**, bringing native Docker CLI capabilities and container workflows to Haiku OS with hardware acceleration!
+I'm excited to share **Haiku Docker v1.0.2**, bringing native Docker CLI capabilities and container workflows to Haiku OS with hardware acceleration!
 
 * **GitHub Repository:** https://github.com/timmagicbeans/haiku-docker
-* **Release v1.0.0:** https://github.com/timmagicbeans/haiku-docker/releases/tag/v1.0.0
+* **Release v1.0.2:** https://github.com/timmagicbeans/haiku-docker/releases/tag/v1.0.2
 * **HaikuPorts Recipe PR:** https://github.com/haikuports/haikuports/pull/14929
 
 > *Note: Tested in nested virtualization; bare-metal reports welcome!*
@@ -13,28 +13,28 @@ I'm excited to share **Haiku Docker v1.0.0**, bringing native Docker CLI capabil
 ### Architecture & Features
 1. **Hardware Acceleration via NVMM:**
    Under the hood, Haiku runs a lightweight Alpine Linux micro-VM via QEMU with NVMM hardware acceleration (`-accel nvmm -smp 1 -m 1024M` partitioned across two 512M NUMA nodes).
-2. **Transparent CLI Integration:**
-   Standard `docker` commands work out of the box in Haiku Terminal.
+2. **Transparent CLI Integration & SSH Multiplexing:**
+   Standard `docker` commands work out of the box in Haiku Terminal. CLI commands utilize an SSH ControlMaster multiplexing socket (`docker-vm.sock`), eliminating connection overhead and slirp socket churn.
 3. **Deskbar Replicant:**
    `DockerDeskbar` sits in the Deskbar tray with live status indicators and right-click Start / Stop controls.
 4. **Host-to-Guest Workspace Sharing & Hot Reloading:**
    Haiku's `/boot/home/dev` is shared into the guest via SSHFS. File modifications trigger inotify events via a custom `BPathMonitor` bridge (tested with `fs.watch` in `node:20-alpine`, latency **~550 ms** without polling).
 5. **Dynamic Port Forwarding:**
-   Containers exposing ports (e.g. `docker run -p 3000:3000`) are automatically tunneled to Haiku host `localhost:3000` via a background daemon.
+   Containers exposing ports (e.g. `docker run -p 3000:3000`) are automatically tunneled to Haiku host `localhost:3000` via a persistent `docker events` stream listener and dynamic ControlMaster forward channels. Verified stable across long idle periods without socket accumulation in QEMU user networking.
 6. **Persistent User Storage:**
    Guest containers, volumes, and configurations are preserved directly in `~/config/settings/docker-vm/os.qcow2`.
 
 ### Requirements & Known Limitations
 * **Enabling NVMM on Haiku:**
-  Hardware virtualization requires CPU VT-x/SVM support (`sysinfo | grep -iE 'vmx|svm'`). The NVMM driver is **included out of the box in standard Haiku beta6** (`/boot/system/add-ons/kernel/drivers/dev/misc/nvmm` packaged in `haiku-r1~beta6`), providing `/dev/misc/nvmm` without requiring third-party drivers. If running Haiku inside a VM, ensure nested virtualization is exposed by the outer hypervisor (e.g. KVM `-cpu host`, VirtualBox Nested VT-x).
+   Hardware virtualization requires CPU VT-x/SVM support (`sysinfo | grep -iE 'vmx|svm'`). The NVMM driver is **included out of the box in standard Haiku beta6** (`/boot/system/add-ons/kernel/drivers/dev/misc/nvmm` packaged in `haiku-r1~beta6`), providing `/dev/misc/nvmm` without requiring third-party drivers. If running Haiku inside a VM, ensure nested virtualization is exposed by the outer hypervisor (e.g. KVM `-cpu host`, VirtualBox Nested VT-x).
 * **Kernel Argument `noxsave` (No AVX):**
-  The guest Linux kernel boots with `noxsave` due to an upstream NVMM XSAVE/XRSTOR emulation limitation in Linux 6.18+. AVX/AVX2 instruction sets are disabled inside the VM.
+   The guest Linux kernel boots with `noxsave` due to an upstream NVMM XSAVE/XRSTOR emulation limitation in Linux 6.18+. AVX/AVX2 instruction sets are disabled inside the VM.
 * **Single vCPU (`-smp 1`):**
-  Micro-VM runs with 1 vCPU for stability under NVMM.
+   Micro-VM runs with 1 vCPU for stability under NVMM.
 * **Port Tunneling:**
-  Dynamic forwarding is currently implemented for TCP ports.
+   Dynamic forwarding is currently implemented for TCP ports.
 * **Graceful Shutdown:**
-  Always stop the VM cleanly via `docker_vm stop` or Deskbar to avoid physical memory leaks in the kernel driver caused by abrupt process termination (`kill -9`).
+   Always stop the VM cleanly via `docker_vm stop` or Deskbar to avoid physical memory leaks in the kernel driver caused by abrupt process termination (`kill -9`).
 
 ### Upstream Bug Reports & HaikuPorts Recipe
 * HaikuPorts recipe PR is submitted ([#14929](https://github.com/haikuports/haikuports/pull/14929)).

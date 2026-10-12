@@ -72,7 +72,7 @@ def ensure_master():
             return True
     return False
 
-def run_ssh_cmd(cmd_str, timeout=10):
+def run_ssh_cmd(cmd_str, timeout=15):
     if not ensure_master():
         return None
     try:
@@ -87,7 +87,7 @@ def run_ssh_cmd(cmd_str, timeout=10):
     return None
 
 def query_mapped_ports():
-    out = run_ssh_cmd("docker ps --format '{{.Ports}}'", timeout=10)
+    out = run_ssh_cmd("docker ps --format '{{.Ports}}'", timeout=15)
     if out is None:
         return None
 

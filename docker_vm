@@ -44,7 +44,7 @@ check_prereqs() {
         cp "$POC_DIR/initramfs-virt" "$CONFIG_DIR/initramfs-virt" 2>/dev/null || true
 
         echo "Verifying SHA256 integrity on initial provisioning..."
-        CURR_OS=$(sha256sum "$CONFIG_DIR/os.qcow2" | awk '{print $1}')
+        CURR_OS=$(sha256sum "$CONFIG_DIR/os.qcow2" | awk '{print $(NF-3)}')
         if [ "$CURR_OS" != "$OS_SHA256" ]; then
             echo "Error: Checksum mismatch for base image (Expected $OS_SHA256, got $CURR_OS)!" >&2
             rm -f "$CONFIG_DIR/os.qcow2" "$CONFIG_DIR/image_verified"
@@ -115,7 +115,7 @@ start_vm() {
             sleep 2
         fi
     fi
-    for qpid in $(ps | grep '[q]emu-system-x86_64' | awk '{print $1}'); do
+    for qpid in $(ps | grep '[q]emu-system-x86_64' | awk '{print $(NF-3)}'); do
         kill -15 $qpid 2>/dev/null
     done
     sleep 1
@@ -239,7 +239,7 @@ except: pass
 " 2>/dev/null
     sleep 2
 
-    for qpid in $(ps | grep '[q]emu-system-x86_64' | awk '{print $1}'); do
+    for qpid in $(ps | grep '[q]emu-system-x86_64' | awk '{print $(NF-3)}'); do
         echo "Sending SIGTERM to lingering QEMU PID $qpid..."
         kill -15 $qpid 2>/dev/null
     done

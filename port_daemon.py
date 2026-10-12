@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
 Dynamic Port Forwarding Daemon for Docker on Haiku OS.
-Queries running docker containers every 2 seconds.
+Queries running docker containers periodically.
 When a container maps host ports (e.g. -p 3000:3000 or -p 8080:80),
 it opens local TCP forwarding tunnels from Haiku localhost to the guest.
 When containers stop, forwarders are cleanly terminated.
+Resilient against idle periods and transient disconnects.
 """
 import subprocess
 import time
@@ -22,10 +23,15 @@ def get_mapped_ports():
         return []
     try:
         res = subprocess.run(
-            ["ssh", "-q", "-o", "ConnectTimeout=2", "-o", "BatchMode=yes",
-             "-o", "StrictHostKeyChecking=no", "-i", KEY, "-p", str(PORT),
+            ["ssh", "-q",
+             "-o", "ConnectTimeout=3",
+             "-o", "BatchMode=yes",
+             "-o", "ServerAliveInterval=15",
+             "-o", "ServerAliveCountMax=3",
+             "-o", "StrictHostKeyChecking=no",
+             "-i", KEY, "-p", str(PORT),
              "root@127.0.0.1", "docker ps --format '{{.Ports}}'"],
-            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, timeout=3
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, timeout=5
         )
         if res.returncode != 0:
             return []
@@ -53,7 +59,8 @@ def start_forward(port):
     cmd = [
         "ssh", "-N",
         "-L", f"127.0.0.1:{port}:127.0.0.1:{port}",
-        "-o", "ServerAliveInterval=5",
+        "-o", "ServerAliveInterval=15",
+        "-o", "ServerAliveCountMax=3",
         "-o", "ExitOnForwardFailure=yes",
         "-o", "StrictHostKeyChecking=no",
         "-i", KEY, "-p", str(PORT),
@@ -76,10 +83,12 @@ def stop_forward(port):
                 pass
 
 def main():
-    print("[Port Daemon] Dynamic Docker port forwarder running...", flush=True)
+    print("[Port Daemon] Dynamic Docker port forwarder running (persistent polling)...", flush=True)
+    consecutive_failures = 0
     while True:
         try:
-            needed = set(get_mapped_ports())
+            ports = get_mapped_ports()
+            needed = set(ports)
             current = set(active_forwards.keys())
 
             # Stop no longer mapped ports
@@ -90,19 +99,21 @@ def main():
             for p in needed - current:
                 start_forward(p)
 
-            # Check dead tunnels: only clean if process died AND it wasn't supposed to run
-            # If still needed, do NOT clean prematurely unless dead
+            # Health check on active tunnel processes
             for p in list(active_forwards.keys()):
                 proc = active_forwards[p]
                 if proc.poll() is not None:
-                    print(f"[Port Daemon] Tunnel on {port} exited (code {proc.poll()}). Restarting if needed...", flush=True)
+                    print(f"[Port Daemon] Tunnel on {p} exited (code {proc.poll()}). Re-evaluating...", flush=True)
                     if p in needed:
                         start_forward(p)
                     else:
                         del active_forwards[p]
 
+            consecutive_failures = 0
         except Exception as e:
-            pass
+            consecutive_failures += 1
+            # Sleep slightly longer during successive transient failures
+            time.sleep(min(consecutive_failures, 5))
 
         time.sleep(2)
 

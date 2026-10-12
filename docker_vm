@@ -255,6 +255,20 @@ status_vm() {
     else
         echo "VM State: stopped"
     fi
+
+    # Auxiliary background daemons
+    if ps | grep '[p]ort_daemon.py' >/dev/null 2>&1; then
+        echo "Port Daemon: active"
+    else
+        echo "Port Daemon: stopped"
+    fi
+
+    if ps | grep '[f]s_bridge.py' >/dev/null 2>&1; then
+        echo "FS Bridge:   active"
+    else
+        echo "FS Bridge:   stopped"
+    fi
+
     echo "=== Haiku Host Memory ==="
     sysinfo -mem
 }

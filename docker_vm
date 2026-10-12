@@ -3,6 +3,7 @@
 CONFIG_DIR="/boot/home/config/settings/docker-vm"
 QMP_SOCK="$CONFIG_DIR/qmp.sock"
 PID_FILE="$CONFIG_DIR/vm.pid"
+SOCK="$CONFIG_DIR/docker-vm.sock"
 PORT=2265
 POC_DIR="/boot/home/docker-poc"
 
@@ -119,7 +120,7 @@ start_vm() {
         kill -15 $qpid 2>/dev/null
     done
     sleep 1
-    rm -f "$QMP_SOCK" "$PID_FILE"
+    rm -f "$QMP_SOCK" "$PID_FILE" "$SOCK"
 
     echo "[2] Starting QEMU micro-VM with NVMM acceleration (Persistent root & data volumes)..."
     qemu-system-x86_64 \
@@ -161,8 +162,26 @@ start_vm() {
         sleep 1
     done
 
-    echo "[4] Mounting sshfs /boot/home/dev..."
-    ssh -q -o StrictHostKeyChecking=no -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1 << 'DEV'
+    echo "[4] Establishing persistent SSH ControlMaster session..."
+    rm -f "$SOCK"
+    ssh -N -f -M -S "$SOCK" -i "$CONFIG_DIR/id_docker_vm" \
+        -o BatchMode=yes \
+        -o StrictHostKeyChecking=no \
+        -o ControlPersist=yes \
+        -o ServerAliveInterval=15 \
+        -o ServerAliveCountMax=3 \
+        -p $PORT root@127.0.0.1 2>/dev/null
+
+    for i in $(seq 1 10); do
+        if [ -S "$SOCK" ] && ssh -O check -S "$SOCK" root@127.0.0.1 2>/dev/null; then
+            echo "ControlMaster socket ready!"
+            break
+        fi
+        sleep 0.5
+    done
+
+    echo "[5] Mounting sshfs /boot/home/dev..."
+    ssh -S "$SOCK" root@127.0.0.1 << 'DEV'
 modprobe fuse
 mkdir -p /boot/home/dev
 if ! mount | grep -q 'on /boot/home/dev'; then
@@ -172,12 +191,12 @@ DEV
 
     # Background file notify bridge
     pkill -f fs_bridge.py 2>/dev/null || true
-    FS_BIN=$(which fs_bridge.py 2>/dev/null || echo /boot/home/config/non-packaged/bin/fs_bridge.py)
+    FS_BIN=$(which fs_bridge.py 2>/dev/null || echo /boot/home/config/bin/fs_bridge.py)
     nohup python3 "$FS_BIN" > "$CONFIG_DIR/fs_bridge.log" 2>&1 &
 
     # Background dynamic port forwarding daemon
     pkill -f port_daemon.py 2>/dev/null || true
-    PORT_BIN=$(which port_daemon.py 2>/dev/null || echo /boot/home/config/non-packaged/bin/port_daemon.py)
+    PORT_BIN=$(which port_daemon.py 2>/dev/null || echo /boot/home/config/bin/port_daemon.py)
     nohup python3 "$PORT_BIN" > "$CONFIG_DIR/port_daemon.log" 2>&1 &
 
     echo "Docker VM is READY. Docker containers, dev share, and port/event bridges started."
@@ -187,9 +206,16 @@ stop_vm() {
     echo "[1] Stopping auxiliary daemons..."
     pkill -f fs_bridge.py 2>/dev/null || true
     pkill -f port_daemon.py 2>/dev/null || true
+    rm -f "$CONFIG_DIR/port_daemon.pid" "$CONFIG_DIR/fs_bridge.pid"
 
     echo "[2] Initiating graceful poweroff via SSH in Alpine..."
-    ssh -o BatchMode=yes -o ConnectTimeout=2 -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1 "poweroff" 2>/dev/null &
+    if [ -S "$SOCK" ] && ssh -O check -S "$SOCK" root@127.0.0.1 2>/dev/null; then
+        ssh -S "$SOCK" root@127.0.0.1 "poweroff" 2>/dev/null &
+        ssh -O exit -S "$SOCK" root@127.0.0.1 2>/dev/null || true
+    else
+        ssh -o BatchMode=yes -o ConnectTimeout=2 -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1 "poweroff" 2>/dev/null &
+    fi
+    rm -f "$SOCK"
 
     echo "[3] Waiting up to 10s for QEMU to shut down cleanly..."
     for i in $(seq 1 10); do
@@ -269,6 +295,12 @@ status_vm() {
         echo "FS Bridge:   stopped"
     fi
 
+    if [ -S "$SOCK" ] && ssh -O check -S "$SOCK" root@127.0.0.1 2>/dev/null; then
+        echo "SSH ControlMaster: active"
+    else
+        echo "SSH ControlMaster: stopped"
+    fi
+
     echo "=== Haiku Host Memory ==="
     sysinfo -mem
 }
@@ -284,13 +316,19 @@ case "$1" in
         status_vm
         ;;
     forward-daemon)
-        python3 port_daemon.py not found
+        PORT_BIN=$(which port_daemon.py 2>/dev/null || echo /boot/home/config/bin/port_daemon.py)
+        exec python3 "$PORT_BIN"
         ;;
     fs-bridge)
-        python3 fs_bridge.py not found
+        FS_BIN=$(which fs_bridge.py 2>/dev/null || echo /boot/home/config/bin/fs_bridge.py)
+        exec python3 "$FS_BIN"
         ;;
     shell)
-        exec ssh -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1
+        if [ -S "$SOCK" ] && ssh -O check -S "$SOCK" root@127.0.0.1 2>/dev/null; then
+            exec ssh -S "$SOCK" root@127.0.0.1
+        else
+            exec ssh -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1
+        fi
         ;;
     *)
         echo "Usage: docker-vm {start|stop|status|shell|forward-daemon|fs-bridge}" >&2

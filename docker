@@ -1,12 +1,29 @@
 #!/bin/sh
-# docker: standard CLI wrapper for Docker on Haiku OS
+# docker: standard CLI wrapper for Docker on Haiku OS using SSH ControlMaster
 CONFIG_DIR="/boot/home/config/settings/docker-vm"
+SOCK="$CONFIG_DIR/docker-vm.sock"
+KEY="$CONFIG_DIR/id_docker_vm"
 PORT=2265
 
-if [ ! -f "$CONFIG_DIR/id_docker_vm" ]; then
-    echo "Error: Docker VM is not initialized. Run 'docker_vm start' first." >&2
+if [ ! -f "$KEY" ]; then
+    echo "Error: Docker VM is not initialized. Run 'docker-vm start' first." >&2
     exit 1
 fi
+
+ensure_master() {
+    if ! ssh -O check -S "$SOCK" root@127.0.0.1 2>/dev/null; then
+        rm -f "$SOCK"
+        ssh -N -f -M -S "$SOCK" -i "$KEY" \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=no \
+            -o ControlPersist=yes \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=3 \
+            -p "$PORT" root@127.0.0.1 2>/dev/null
+    fi
+}
+
+ensure_master
 
 if [ -t 0 ] && [ -t 1 ]; then
     SSH_TTY="-t"
@@ -14,4 +31,4 @@ else
     SSH_TTY=""
 fi
 
-exec ssh $SSH_TTY -q -o StrictHostKeyChecking=no -i "$CONFIG_DIR/id_docker_vm" -p "$PORT" root@127.0.0.1 "docker $@"
+exec ssh $SSH_TTY -S "$SOCK" root@127.0.0.1 "docker $@"

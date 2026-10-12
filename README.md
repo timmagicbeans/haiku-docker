@@ -68,13 +68,14 @@ Or manually copy `docker_haiku-1.0.0-1-x86_64.hpkg` to `~/config/packages/`.
 
 ## Building Micro-VM Image from Source
 
-The base micro-VM image `os-1.0.0.qcow2` can be cleanly reproduced using Alpine Linux tools:
+The base micro-VM image `os-1.0.0.qcow2` can be constructed using Alpine Linux tools:
 
 ```sh
 ./scripts/build-image.sh
 ```
 
-See `THIRD_PARTY_LICENSES.md` for upstream Alpine packages, GPL Linux kernel sources, and license disclosures.
+> [!NOTE]
+> Images built via `alpine-make-vm-image` are functionally identical but **not bit-for-bit reproducible** due to filesystem timestamps, ext4 volume UUIDs, and upstream security package updates. The reference SHA256 (`5d22f4c008cf2aa31e68026c8ed72c6dbfa4053f02692dd658bfd3175a5c8307`) corresponds strictly to the official binary image published in GitHub Releases. Custom builds can verify package integrity against the version manifest in `THIRD_PARTY_LICENSES.md`.
 
 ## License
 

@@ -1,0 +1,81 @@
+# Docker on Haiku OS (Accelerated by NVMM)
+
+Native Docker engine CLI and lightweight Linux micro-VM virtualization environment for Haiku OS, accelerated by NetBSD Virtual Machine Monitor (NVMM) port and QEMU.
+
+## Architecture Overview
+
+```
+       +-------------------------------------------------------------+
+       |                         Haiku OS                            |
+       |                                                             |
+       |   +-------------------+              +------------------+   |
+       |   |    docker (CLI)   |              |  DockerDeskbar   |   |
+       |   +---------+---------+              +--------+---------+   |
+       |             | (SSH execution)                 | (Tray GUI)  |
+       |             v                                 v             |
+       |   +-----------------------------------------------------+   |
+       |   |       docker_vm controller & background bridges     |   |
+       |   |    (port_daemon.py, fs_bridge.py / BPathMonitor)    |   |
+       |   +--------------------------+--------------------------+   |
+       |                              |                              |
+       |                 QEMU with NVMM Acceleration                 |
+       |                   (/dev/misc/nvmm, smm=off)                 |
+       +------------------------------+------------------------------+
+                                      | VirtIO
+       +------------------------------v------------------------------+
+       |                   Alpine Linux Micro-VM                     |
+       |   +-----------------------------------------------------+   |
+       |   |                   dockerd engine                    |   |
+       |   |            (containers, bridge networks)            |   |
+       |   +--------------------------+--------------------------+   |
+       |                              |                              |
+       |      sshfs /boot/home/dev <-> host bidirectional share      |
+       +-------------------------------------------------------------+
+```
+
+## Features
+
+- **Standard `docker` CLI wrapper:** Run `docker run`, `docker ps`, `docker build`, `docker compose` directly from Terminal or build scripts.
+- **Hardware Acceleration:** Uses `/dev/misc/nvmm` kernel accelerator via QEMU with near-native CPU speeds.
+- **Sub-second Hot Reload Bridge:** Bidirectional filesystem synchronization between Haiku workspace (`/boot/home/dev`) and guest container mount with Haiku native `BPathMonitor` event bridge (latency < 600 ms).
+- **Dynamic Port Forwarding:** Zero-config container ports (`-p 3000:3000`) forwarded locally on Haiku localhost on-the-fly and cleanly terminated when containers stop.
+- **Deskbar Tray Replicant (`DockerDeskbar`):** Live status monitor, start/stop controls, and workspace access in Haiku Deskbar.
+- **Persistence & Integrity:** Base image SHA256 integrity verification with persistent storage in `~/config/settings/docker-vm/`.
+
+---
+
+## Known Constraints & Driver Workarounds
+
+1. **Host Memory Limit for Micro-VM (NVMM):**
+   - The VM is configured with **1024 MB RAM** partitioned into two 512 MB NUMA blocks (`-object memory-backend-ram,size=512M`).
+   - SMM must be disabled (`-machine pc,smm=off`) to avoid `nvmm_gpa_unmap: Cannot allocate memory` during GPA region tear-down.
+2. **Linux Extended FPU State (`noxsave`):**
+   - Linux kernel in the guest requires `noxsave` on the command line due to an upstream NVMM XSAVE/XRSTOR emulation bug. AVX/AVX2 instructions are disabled inside the VM.
+3. **Abnormal Termination Memory Release:**
+   - Always stop the micro-VM cleanly via `docker_vm stop` or Deskbar tray. Terminating QEMU with `SIGKILL` leaks physical memory mapping in the NVMM kernel driver until host reboot.
+
+---
+
+## Installation via HaikuPorts / HPKG
+
+```sh
+pkgman install docker_haiku
+```
+
+Or manually copy `docker_haiku-1.0.0-1-x86_64.hpkg` to `~/config/packages/`.
+
+---
+
+## Building Micro-VM Image from Source
+
+The base micro-VM image `os-1.0.0.qcow2` can be cleanly reproduced using Alpine Linux tools:
+
+```sh
+./scripts/build-image.sh
+```
+
+See `THIRD_PARTY_LICENSES.md` for upstream Alpine packages, GPL Linux kernel sources, and license disclosures.
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.

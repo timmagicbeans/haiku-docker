@@ -1,0 +1,285 @@
+#!/bin/sh
+# docker-vm: Lifecycle controller for Docker VM on Haiku OS
+CONFIG_DIR="/boot/home/config/settings/docker-vm"
+QMP_SOCK="$CONFIG_DIR/qmp.sock"
+PID_FILE="$CONFIG_DIR/vm.pid"
+PORT=2265
+POC_DIR="/boot/home/docker-poc"
+
+# Verified base image
+BASE_IMAGE="os-1.0.0.qcow2"
+OS_SHA256="5d22f4c008cf2aa31e68026c8ed72c6dbfa4053f02692dd658bfd3175a5c8307"
+
+check_prereqs() {
+    ACCEL="-accel nvmm"
+    if [ ! -e /dev/misc/nvmm ]; then
+        if [ "$FROM_GUI" = "1" ]; then
+            alert --warning "NVMM kernel accelerator (/dev/misc/nvmm) is not available. Falling back to TCG software emulation." "OK"
+        else
+            echo "WARNING: /dev/misc/nvmm not found! NVMM kernel accelerator unavailable." >&2
+            echo "Falling back to TCG (software emulation)..." >&2
+        fi
+        ACCEL="-accel tcg"
+    fi
+
+    mkdir -p "$CONFIG_DIR"
+
+    # 1. Base micro-VM image provisioning with versioned verification marker
+    NEED_VERIFY=0
+    if [ ! -f "$CONFIG_DIR/image_verified" ] || [ "$(cat "$CONFIG_DIR/image_verified" 2>/dev/null)" != "$BASE_IMAGE:$OS_SHA256" ]; then
+        NEED_VERIFY=1
+    fi
+
+    if [ ! -f "$CONFIG_DIR/os.qcow2" ] || [ "$NEED_VERIFY" = "1" ]; then
+        echo "Base micro-VM image not verified or missing in settings. Provisioning $BASE_IMAGE..."
+        if [ -f "$POC_DIR/$BASE_IMAGE" ]; then
+            cp "$POC_DIR/$BASE_IMAGE" "$CONFIG_DIR/os.qcow2"
+        elif [ -f "$POC_DIR/os.qcow2" ]; then
+            cp "$POC_DIR/os.qcow2" "$CONFIG_DIR/os.qcow2"
+        else
+            echo "Error: Source image missing." >&2
+            exit 1
+        fi
+        cp "$POC_DIR/vmlinuz-virt" "$CONFIG_DIR/vmlinuz-virt" 2>/dev/null || true
+        cp "$POC_DIR/initramfs-virt" "$CONFIG_DIR/initramfs-virt" 2>/dev/null || true
+
+        echo "Verifying SHA256 integrity on initial provisioning..."
+        CURR_OS=$(sha256sum "$CONFIG_DIR/os.qcow2" | awk '{print $1}')
+        if [ "$CURR_OS" != "$OS_SHA256" ]; then
+            echo "Error: Checksum mismatch for base image (Expected $OS_SHA256, got $CURR_OS)!" >&2
+            rm -f "$CONFIG_DIR/os.qcow2" "$CONFIG_DIR/image_verified"
+            if [ "$FROM_GUI" = "1" ]; then
+                alert --stop "Base micro-VM image SHA256 verification failed! Purged corrupted file."
+            fi
+            exit 1
+        fi
+        echo "$BASE_IMAGE:$OS_SHA256" > "$CONFIG_DIR/image_verified"
+        echo "SHA256 verified successfully."
+    fi
+
+    # 2. Persistent data volume initialization (never overwritten)
+    if [ ! -f "$CONFIG_DIR/data.qcow2" ]; then
+        echo "Creating persistent Docker data volume ($CONFIG_DIR/data.qcow2)..."
+        if [ -f "$POC_DIR/data.qcow2" ]; then
+            cp "$POC_DIR/data.qcow2" "$CONFIG_DIR/data.qcow2"
+        else
+            qemu-img create -f qcow2 "$CONFIG_DIR/data.qcow2" 10G
+        fi
+    fi
+
+    # 3. SSH keypair generation
+    if [ ! -f "$CONFIG_DIR/id_docker_vm" ]; then
+        echo "Generating SSH keys for VM communication..."
+        if [ -f "/boot/home/.ssh/id_docker_vm" ]; then
+            cp "/boot/home/.ssh/id_docker_vm" "$CONFIG_DIR/id_docker_vm"
+            cp "/boot/home/.ssh/id_docker_vm.pub" "$CONFIG_DIR/id_docker_vm.pub"
+        else
+            ssh-keygen -t ed25519 -N "" -f "$CONFIG_DIR/id_docker_vm"
+        fi
+        chmod 600 "$CONFIG_DIR/id_docker_vm"
+    fi
+
+    # 4. Host sshd on port 2223 for bidirectional share
+    mkdir -p /boot/home/.ssh
+    if [ -f "$CONFIG_DIR/id_docker_vm.pub" ]; then
+        if ! grep -q -f "$CONFIG_DIR/id_docker_vm.pub" /boot/home/.ssh/authorized_keys 2>/dev/null; then
+            cat "$CONFIG_DIR/id_docker_vm.pub" >> /boot/home/.ssh/authorized_keys
+        fi
+    fi
+
+    if ! ps | grep '[s]shd.*2223' >/dev/null 2>&1; then
+        echo "Starting host SSH server on port 2223 for /boot/home/dev share..."
+        cat << 'SSHD' > "$CONFIG_DIR/sshd_config_2223"
+Port 2223
+ListenAddress 0.0.0.0
+PermitRootLogin yes
+AuthorizedKeysFile /boot/home/.ssh/authorized_keys
+Subsystem sftp internal-sftp
+ChrootDirectory /boot/home/dev
+ForceCommand internal-sftp
+AllowTcpForwarding no
+SSHD
+        /bin/sshd -f "$CONFIG_DIR/sshd_config_2223" 2>/dev/null || true
+    fi
+}
+
+start_vm() {
+    check_prereqs
+
+    echo "[1] Ensuring any lingering QEMU is cleanly stopped..."
+    if [ -f "$PID_FILE" ]; then
+        old_pid=$(cat "$PID_FILE" 2>/dev/null || echo "")
+        if [ -n "$old_pid" ] && kill -0 "$old_pid" 2>/dev/null; then
+            echo "Stopping active process $old_pid..."
+            kill -15 "$old_pid" 2>/dev/null || true
+            sleep 2
+        fi
+    fi
+    for qpid in $(ps | grep '[q]emu-system-x86_64' | awk '{print $1}'); do
+        kill -15 $qpid 2>/dev/null
+    done
+    sleep 1
+    rm -f "$QMP_SOCK" "$PID_FILE"
+
+    echo "[2] Starting QEMU micro-VM with NVMM acceleration (Persistent root & data volumes)..."
+    qemu-system-x86_64 \
+      $ACCEL \
+      -smp 1 \
+      -machine pc,smm=off \
+      -nodefaults \
+      -vga none \
+      -display none \
+      -m 1024M \
+      -object memory-backend-ram,id=m0,size=512M \
+      -object memory-backend-ram,id=m1,size=512M \
+      -numa node,memdev=m0 -numa node,memdev=m1 \
+      -kernel "$CONFIG_DIR/vmlinuz-virt" \
+      -initrd "$CONFIG_DIR/initramfs-virt" \
+      -drive file="$CONFIG_DIR/os.qcow2",if=virtio,id=rootdisk \
+      -drive file="$CONFIG_DIR/data.qcow2",if=virtio,id=datadisk \
+      -netdev user,id=net0,hostfwd=tcp:127.0.0.1:${PORT}-:22 \
+      -device virtio-net-pci,netdev=net0 \
+      -append "console=ttyS0 noxsave root=/dev/vda1 rw rootfstype=ext4 tsc=reliable clocksource=tsc" \
+      -qmp unix:${QMP_SOCK},server,nowait \
+      -serial file:"$CONFIG_DIR/vm.log" &
+
+    QPID=$!
+    echo $QPID > "$PID_FILE"
+    echo "QEMU started with PID ${QPID}"
+
+    echo "[3] Waiting for SSH on 127.0.0.1:${PORT}..."
+    for i in $(seq 1 45); do
+        if ! kill -0 $QPID 2>/dev/null; then
+            echo "QEMU exited unexpectedly!" >&2
+            cat "$CONFIG_DIR/vm.log" | tr '\r' '\n' | tail -n 20 >&2
+            exit 1
+        fi
+        if ssh -q -o BatchMode=yes -o ConnectTimeout=1 -o StrictHostKeyChecking=no -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1 true 2>/dev/null; then
+            echo "Alpine SSH Ready!"
+            break
+        fi
+        sleep 1
+    done
+
+    echo "[4] Mounting sshfs /boot/home/dev..."
+    ssh -q -o StrictHostKeyChecking=no -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1 << 'DEV'
+modprobe fuse
+mkdir -p /boot/home/dev
+if ! mount | grep -q 'on /boot/home/dev'; then
+  sshfs -p 2223 -o allow_other,uid=1000,gid=1000,reconnect,ServerAliveInterval=15,StrictHostKeyChecking=no,cache=no,IdentityFile=/root/.ssh/share_key user@10.0.2.2:/ /boot/home/dev
+fi
+DEV
+
+    # Background file notify bridge
+    pkill -f fs_bridge.py 2>/dev/null || true
+    FS_BIN=$(which fs_bridge.py 2>/dev/null || echo /boot/home/config/non-packaged/bin/fs_bridge.py)
+    nohup python3 "$FS_BIN" > "$CONFIG_DIR/fs_bridge.log" 2>&1 &
+
+    # Background dynamic port forwarding daemon
+    pkill -f port_daemon.py 2>/dev/null || true
+    PORT_BIN=$(which port_daemon.py 2>/dev/null || echo /boot/home/config/non-packaged/bin/port_daemon.py)
+    nohup python3 "$PORT_BIN" > "$CONFIG_DIR/port_daemon.log" 2>&1 &
+
+    echo "Docker VM is READY. Docker containers, dev share, and port/event bridges started."
+}
+
+stop_vm() {
+    echo "[1] Stopping auxiliary daemons..."
+    pkill -f fs_bridge.py 2>/dev/null || true
+    pkill -f port_daemon.py 2>/dev/null || true
+
+    echo "[2] Initiating graceful poweroff via SSH in Alpine..."
+    ssh -o BatchMode=yes -o ConnectTimeout=2 -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1 "poweroff" 2>/dev/null &
+
+    echo "[3] Waiting up to 10s for QEMU to shut down cleanly..."
+    for i in $(seq 1 10); do
+        if ! ps | grep -q '[q]emu-system-x86_64'; then
+            echo "SUCCESS: Guest powered off cleanly!"
+            rm -f "$QMP_SOCK" "$PID_FILE"
+            return 0
+        fi
+        sleep 1
+    done
+
+    echo "[4] Attempting QMP system_powerdown..."
+    python3 -c "
+import socket
+try:
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.connect('$QMP_SOCK')
+    s.recv(1024)
+    s.sendall(b'{\"execute\": \"qmp_capabilities\"}\n')
+    s.recv(1024)
+    s.sendall(b'{\"execute\": \"system_powerdown\"}\n')
+    s.close()
+except: pass
+" 2>/dev/null
+
+    for i in $(seq 1 8); do
+        if ! ps | grep -q '[q]emu-system-x86_64'; then
+            echo "SUCCESS: QEMU exited after system_powerdown!"
+            rm -f "$QMP_SOCK" "$PID_FILE"
+            return 0
+        fi
+        sleep 1
+    done
+
+    echo "[5] Fallback: QMP quit..."
+    python3 -c "
+import socket
+try:
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.connect('$QMP_SOCK')
+    s.recv(1024)
+    s.sendall(b'{\"execute\": \"qmp_capabilities\"}\n')
+    s.recv(1024)
+    s.sendall(b'{\"execute\": \"quit\"}\n')
+    s.close()
+except: pass
+" 2>/dev/null
+    sleep 2
+
+    for qpid in $(ps | grep '[q]emu-system-x86_64' | awk '{print $1}'); do
+        echo "Sending SIGTERM to lingering QEMU PID $qpid..."
+        kill -15 $qpid 2>/dev/null
+    done
+    sleep 1
+    rm -f "$QMP_SOCK" "$PID_FILE"
+    echo "VM shutdown completed."
+}
+
+status_vm() {
+    echo "=== Docker VM Status ==="
+    if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE" 2>/dev/null) 2>/dev/null; then
+        echo "VM State: running (PID $(cat "$PID_FILE"))"
+    else
+        echo "VM State: stopped"
+    fi
+    echo "=== Haiku Host Memory ==="
+    sysinfo -mem
+}
+
+case "$1" in
+    start)
+        start_vm
+        ;;
+    stop)
+        stop_vm
+        ;;
+    status)
+        status_vm
+        ;;
+    forward-daemon)
+        python3 port_daemon.py not found
+        ;;
+    fs-bridge)
+        python3 fs_bridge.py not found
+        ;;
+    shell)
+        exec ssh -i "$CONFIG_DIR/id_docker_vm" -p $PORT root@127.0.0.1
+        ;;
+    *)
+        echo "Usage: docker-vm {start|stop|status|shell|forward-daemon|fs-bridge}" >&2
+        exit 1
+        ;;
+esac

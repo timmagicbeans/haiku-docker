@@ -1,0 +1,29 @@
+name            docker_haiku
+version         1.0.0-1
+architecture    x86_64
+summary         "Docker Engine & Micro-VM with NVMM Acceleration for Haiku"
+description     "Provides standard docker CLI command execution and micro-VM \
+management on Haiku OS powered by QEMU with NVMM hardware virtualization, \
+automatic SSH port forwarding daemon, bidirectional dev sharing via sshfs, and \
+Deskbar tray management. Persistent user data is safely maintained in \
+~/config/settings/docker-vm."
+packager        "Antigravity Developer <developer@haiku-os.org>"
+vendor          "Haiku Docker Project"
+licenses {
+    "MIT"
+}
+copyrights {
+    "2026 Haiku Docker Project"
+}
+provides {
+    docker_haiku = 1.0.0-1
+    cmd:docker = 1.0.0-1
+    cmd:docker_vm = 1.0.0-1
+    cmd:DockerDeskbar = 1.0.0-1
+    cmd:path_monitor = 1.0.0-1
+}
+requires {
+    haiku >= r1~beta6
+    qemu_x86 >= 8.0
+    openssh
+}

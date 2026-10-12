@@ -1,0 +1,17 @@
+#!/bin/sh
+# docker: standard CLI wrapper for Docker on Haiku OS
+CONFIG_DIR="/boot/home/config/settings/docker-vm"
+PORT=2265
+
+if [ ! -f "$CONFIG_DIR/id_docker_vm" ]; then
+    echo "Error: Docker VM is not initialized. Run 'docker_vm start' first." >&2
+    exit 1
+fi
+
+if [ -t 0 ] && [ -t 1 ]; then
+    SSH_TTY="-t"
+else
+    SSH_TTY=""
+fi
+
+exec ssh $SSH_TTY -q -o StrictHostKeyChecking=no -i "$CONFIG_DIR/id_docker_vm" -p "$PORT" root@127.0.0.1 "docker $@"

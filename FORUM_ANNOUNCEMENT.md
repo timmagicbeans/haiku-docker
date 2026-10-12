@@ -28,7 +28,7 @@ I'm excited to share **Haiku Docker v1.0.2**, bringing native Docker CLI capabil
 * **Enabling NVMM on Haiku:**
    Hardware virtualization requires CPU VT-x/SVM support (`sysinfo | grep -iE 'vmx|svm'`). The NVMM driver is **included out of the box in standard Haiku beta6** (`/boot/system/add-ons/kernel/drivers/dev/misc/nvmm` packaged in `haiku-r1~beta6`), providing `/dev/misc/nvmm` without requiring third-party drivers. If running Haiku inside a VM, ensure nested virtualization is exposed by the outer hypervisor (e.g. KVM `-cpu host`, VirtualBox Nested VT-x).
 * **Kernel Argument `noxsave` (No AVX):**
-   The guest Linux kernel boots with `noxsave` due to an upstream NVMM XSAVE/XRSTOR emulation limitation in Linux 6.18+. AVX/AVX2 instruction sets are disabled inside the VM.
+   The guest Linux kernel boots with `noxsave` due to an upstream NVMM XSAVE/XRSTOR emulation limitation in Linux 6.18. AVX/AVX2 instruction sets are disabled inside the VM.
 * **Single vCPU (`-smp 1`):**
    Micro-VM runs with 1 vCPU for stability under NVMM.
 * **Port Tunneling:**
@@ -38,6 +38,9 @@ I'm excited to share **Haiku Docker v1.0.2**, bringing native Docker CLI capabil
 
 ### Upstream Bug Reports & HaikuPorts Recipe
 * HaikuPorts recipe PR is submitted ([#14929](https://github.com/haikuports/haikuports/pull/14929)).
-* Detailed NVMM driver bug reports and workarounds (`noxsave`, `smm=off`, physical memory leak on SIGKILL) are documented for Haiku Trac developers in [haiku_nvmm_tickets.md](https://github.com/timmagicbeans/haiku-docker/blob/main/haiku_nvmm_tickets.md).
+* Upstream Trac tickets filed for Haiku kernel developers:
+  - Ticket 1 (#XXXXX): Linux guest (6.18) crashes in fpstate_reset without noxsave
+  - Ticket 2 (#XXXXX): Abort in nvmm_gpa_unmap under SMP / default PC machine
+  - Ticket 3 (#XXXXX): Physical memory leak in NVMM driver upon SIGKILL
 
 Feedback, testing, and contributions are warmly welcome!

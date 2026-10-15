@@ -1,25 +1,25 @@
 KERN: low resource pages: critical -> normal
 KERN: runtime_loader: Cannot open file libcurl.so (needed by /boot/system/apps/Firefox/pingsender): No such file or directory
 KERN: Last message repeated 2 times.
-AUTH 'sshd-session'[65036]: Received disconnect from 192.168.0.196 port 63720:11: disconnected by user
-AUTH 'sshd-session'[65036]: Disconnected from user user 192.168.0.196 port 63720
-AUTH 'sshd-session'[66000]: Accepted publickey for user from 192.168.0.196 port 50196 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:50201 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[66007]: Accepted publickey for user from 192.168.0.196 port 50210 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[66009]: Received disconnect from 192.168.0.196 port 50210:11: disconnected by user
-AUTH 'sshd-session'[66009]: Disconnected from user user 192.168.0.196 port 50210
-AUTH 'sshd-session'[66011]: Accepted publickey for user from 192.168.0.196 port 50211 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[66024]: Accepted publickey for user from 192.168.0.196 port 50216 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[66026]: Received disconnect from 192.168.0.196 port 50216:11: disconnected by user
-AUTH 'sshd-session'[66026]: Disconnected from user user 192.168.0.196 port 50216
-AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:50218 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[66028]: Accepted publickey for user from 192.168.0.196 port 50224 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[66044]: Accepted publickey for user from 192.168.0.196 port 50227 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[66046]: Received disconnect from 192.168.0.196 port 50227:11: disconnected by user
-AUTH 'sshd-session'[66046]: Disconnected from user user 192.168.0.196 port 50227
-AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:50236 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[66057]: Accepted publickey for user from 192.168.0.196 port 50238 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[66030]: Connection closed by 192.168.0.196 port 50224
+AUTH 'sshd-session'[65036]: Received disconnect from 192.168.0.X port 63720:11: disconnected by user
+AUTH 'sshd-session'[65036]: Disconnected from user user 192.168.0.X port 63720
+AUTH 'sshd-session'[66000]: Accepted publickey for user from 192.168.0.X port 50196 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.X]:50201 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[66007]: Accepted publickey for user from 192.168.0.X port 50210 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[66009]: Received disconnect from 192.168.0.X port 50210:11: disconnected by user
+AUTH 'sshd-session'[66009]: Disconnected from user user 192.168.0.X port 50210
+AUTH 'sshd-session'[66011]: Accepted publickey for user from 192.168.0.X port 50211 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[66024]: Accepted publickey for user from 192.168.0.X port 50216 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[66026]: Received disconnect from 192.168.0.X port 50216:11: disconnected by user
+AUTH 'sshd-session'[66026]: Disconnected from user user 192.168.0.X port 50216
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.X]:50218 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[66028]: Accepted publickey for user from 192.168.0.X port 50224 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[66044]: Accepted publickey for user from 192.168.0.X port 50227 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[66046]: Received disconnect from 192.168.0.X port 50227:11: disconnected by user
+AUTH 'sshd-session'[66046]: Disconnected from user user 192.168.0.X port 50227
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.X]:50236 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[66057]: Accepted publickey for user from 192.168.0.X port 50238 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[66030]: Connection closed by 192.168.0.X port 50224
 KERN: 66068: DEBUGGER: abort() called
 KERN: debug_server: Thread 66068 entered the debugger: Debugger call: `abort() called'
 KERN: stack trace, current PC 0x3fcc63269  </boot/system/lib/libroot.so> _kern_debugger + 0x9:
@@ -37,10 +37,10 @@ KERN:   (0x7f632e509d70)  0x16e462136e9  </boot/system/bin/qemu-system-x86_64> m
 KERN:   (0x7f632e509d80)  0x16e4621505e  </boot/system/bin/qemu-system-x86_64> _start + 0x3e
 KERN:   (0x7f632e509db0)  0xbad726b4c5  </boot/system/runtime_loader> runtime_loader + 0x115
 KERN: low resource memory: note -> normal
-AUTH 'sshd-session'[66002]: Received disconnect from 192.168.0.196 port 50196:11: disconnected by user
-AUTH 'sshd-session'[66002]: Disconnected from user user 192.168.0.196 port 50196
-AUTH 'sshd-session'[66013]: Received disconnect from 192.168.0.196 port 50211:11: disconnected by user
-AUTH 'sshd-session'[66013]: Disconnected from user user 192.168.0.196 port 50211
+AUTH 'sshd-session'[66002]: Received disconnect from 192.168.0.X port 50196:11: disconnected by user
+AUTH 'sshd-session'[66002]: Disconnected from user user 192.168.0.X port 50196
+AUTH 'sshd-session'[66013]: Received disconnect from 192.168.0.X port 50211:11: disconnected by user
+AUTH 'sshd-session'[66013]: Disconnected from user user 192.168.0.X port 50211
 KERN: 66137: DEBUGGER: abort() called
 KERN: debug_server: Thread 66137 entered the debugger: Debugger call: `abort() called'
 KERN: stack trace, current PC 0xb031593269  </boot/system/lib/libroot.so> _kern_debugger + 0x9:

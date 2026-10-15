@@ -39,43 +39,43 @@ AUTH 'sshd-session'[63843]: Failed none for invalid user root from 127.0.0.1 por
 AUTH 'sshd-session'[63843]: Failed password for invalid user root from 127.0.0.1 port 35727 ssh2
 Last message repeated 1 time
 AUTH 'sshd-session'[63843]: Connection closed by invalid user root 127.0.0.1 port 35727 [preauth]
-AUTH 'sshd-session'[63623]: Received disconnect from 192.168.0.196 port 63429:11: disconnected by user
-AUTH 'sshd-session'[63623]: Disconnected from user user 192.168.0.196 port 63429
-AUTH 'sshd-session'[63856]: Accepted publickey for user from 192.168.0.196 port 63529 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[63858]: Received disconnect from 192.168.0.196 port 63529:11: disconnected by user
-AUTH 'sshd-session'[63858]: Disconnected from user user 192.168.0.196 port 63529
-AUTH 'sshd-session'[63862]: Accepted publickey for user from 192.168.0.196 port 63530 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[63864]: Received disconnect from 192.168.0.196 port 63530:11: disconnected by user
-AUTH 'sshd-session'[63864]: Disconnected from user user 192.168.0.196 port 63530
-AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63531 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[63884]: Accepted publickey for user from 192.168.0.196 port 63533 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[63886]: Received disconnect from 192.168.0.196 port 63533:11: disconnected by user
-AUTH 'sshd-session'[63886]: Disconnected from user user 192.168.0.196 port 63533
-AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63538 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[63894]: Accepted publickey for user from 192.168.0.196 port 63539 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[63899]: Received disconnect from 192.168.0.196 port 63539:11: disconnected by user
-AUTH 'sshd-session'[63899]: Disconnected from user user 192.168.0.196 port 63539
-AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63540 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63543 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63544 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[63920]: Accepted publickey for user from 192.168.0.196 port 63548 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[63922]: Received disconnect from 192.168.0.196 port 63548:11: disconnected by user
-AUTH 'sshd-session'[63922]: Disconnected from user user 192.168.0.196 port 63548
-AUTH 'sshd-session'[63928]: Accepted publickey for user from 192.168.0.196 port 63555 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[63930]: Received disconnect from 192.168.0.196 port 63555:11: disconnected by user
-AUTH 'sshd-session'[63930]: Disconnected from user user 192.168.0.196 port 63555
-AUTH 'sshd'[127]: drop connection #24 from [192.168.0.196]:63566 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[63940]: Accepted publickey for user from 192.168.0.196 port 63567 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[63943]: Received disconnect from 192.168.0.196 port 63567:11: disconnected by user
-AUTH 'sshd-session'[63943]: Disconnected from user user 192.168.0.196 port 63567
-AUTH 'sshd-session'[63954]: Accepted publickey for user from 192.168.0.196 port 63570 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[64131]: Accepted publickey for user from 192.168.0.196 port 63613 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[64133]: Received disconnect from 192.168.0.196 port 63613:11: disconnected by user
-AUTH 'sshd-session'[64133]: Disconnected from user user 192.168.0.196 port 63613
+AUTH 'sshd-session'[63623]: Received disconnect from 192.168.0.X port 63429:11: disconnected by user
+AUTH 'sshd-session'[63623]: Disconnected from user user 192.168.0.X port 63429
+AUTH 'sshd-session'[63856]: Accepted publickey for user from 192.168.0.X port 63529 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[63858]: Received disconnect from 192.168.0.X port 63529:11: disconnected by user
+AUTH 'sshd-session'[63858]: Disconnected from user user 192.168.0.X port 63529
+AUTH 'sshd-session'[63862]: Accepted publickey for user from 192.168.0.X port 63530 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[63864]: Received disconnect from 192.168.0.X port 63530:11: disconnected by user
+AUTH 'sshd-session'[63864]: Disconnected from user user 192.168.0.X port 63530
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.X]:63531 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[63884]: Accepted publickey for user from 192.168.0.X port 63533 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[63886]: Received disconnect from 192.168.0.X port 63533:11: disconnected by user
+AUTH 'sshd-session'[63886]: Disconnected from user user 192.168.0.X port 63533
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.X]:63538 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[63894]: Accepted publickey for user from 192.168.0.X port 63539 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[63899]: Received disconnect from 192.168.0.X port 63539:11: disconnected by user
+AUTH 'sshd-session'[63899]: Disconnected from user user 192.168.0.X port 63539
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.X]:63540 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.X]:63543 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.X]:63544 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[63920]: Accepted publickey for user from 192.168.0.X port 63548 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[63922]: Received disconnect from 192.168.0.X port 63548:11: disconnected by user
+AUTH 'sshd-session'[63922]: Disconnected from user user 192.168.0.X port 63548
+AUTH 'sshd-session'[63928]: Accepted publickey for user from 192.168.0.X port 63555 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[63930]: Received disconnect from 192.168.0.X port 63555:11: disconnected by user
+AUTH 'sshd-session'[63930]: Disconnected from user user 192.168.0.X port 63555
+AUTH 'sshd'[127]: drop connection #24 from [192.168.0.X]:63566 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[63940]: Accepted publickey for user from 192.168.0.X port 63567 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[63943]: Received disconnect from 192.168.0.X port 63567:11: disconnected by user
+AUTH 'sshd-session'[63943]: Disconnected from user user 192.168.0.X port 63567
+AUTH 'sshd-session'[63954]: Accepted publickey for user from 192.168.0.X port 63570 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[64131]: Accepted publickey for user from 192.168.0.X port 63613 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[64133]: Received disconnect from 192.168.0.X port 63613:11: disconnected by user
+AUTH 'sshd-session'[64133]: Disconnected from user user 192.168.0.X port 63613
 AUTH 'sshd-session'[63370]: Received disconnect from 127.0.0.1 port 33501:11: disconnected by user
 AUTH 'sshd-session'[63370]: Disconnected from user user 127.0.0.1 port 33501
-AUTH 'sshd-session'[63100]: Received disconnect from 192.168.0.196 port 63331:11: disconnected by user
-AUTH 'sshd-session'[63100]: Disconnected from user user 192.168.0.196 port 63331
+AUTH 'sshd-session'[63100]: Received disconnect from 192.168.0.X port 63331:11: disconnected by user
+AUTH 'sshd-session'[63100]: Disconnected from user user 192.168.0.X port 63331
 KERN: package_daemon: [30928199717:    67] Volume::_PackagesEntryRemoved("docker_haiku-1.0.2-1-x86_64.hpkg")
 KERN: package_daemon: [30928199751:    67] Volume::_PackagesEntryCreated("docker_haiku-1.0.2-1-x86_64.hpkg")
 KERN: package_daemon: [30928199762:    67] node monitoring created event for already known entry "docker_haiku-1.0.2-1-x86_64.hpkg"
@@ -148,12 +148,12 @@ AUTH 'sshd-session'[64836]: Connection closed by 127.0.0.1 port 41980
 AUTH 'sshd'[64890]: error: Bind to port 2223 on 0.0.0.0 failed: Address already in use.
 AUTH 'sshd'[64890]: fatal: Cannot bind any address.
 AUTH 'sshd-session'[64978]: Accepted publickey for user from 127.0.0.1 port 42615 ssh2: ED25519 SHA256:I/FSdGHhqyvvr9ngKPkexXImkzcBS8Gn9izn6As2lYQ
-AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:63712 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[65027]: Accepted publickey for user from 192.168.0.196 port 63716 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
-AUTH 'sshd-session'[65029]: Received disconnect from 192.168.0.196 port 63716:11: disconnected by user
-AUTH 'sshd-session'[65029]: Disconnected from user user 192.168.0.196 port 63716
-AUTH 'sshd'[127]: drop connection #33 from [192.168.0.196]:63717 on [192.168.0.169]:22 Maxstartups
-AUTH 'sshd-session'[65034]: Accepted publickey for user from 192.168.0.196 port 63720 ssh2: ED25519 SHA256:1Qk5hLZcou6Ow161YlC5IhERVDO+DEyPuZAdWGjZj6E
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.X]:63712 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[65027]: Accepted publickey for user from 192.168.0.X port 63716 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
+AUTH 'sshd-session'[65029]: Received disconnect from 192.168.0.X port 63716:11: disconnected by user
+AUTH 'sshd-session'[65029]: Disconnected from user user 192.168.0.X port 63716
+AUTH 'sshd'[127]: drop connection #33 from [192.168.0.X]:63717 on [192.168.0.Y]:22 Maxstartups
+AUTH 'sshd-session'[65034]: Accepted publickey for user from 192.168.0.X port 63720 ssh2: ED25519 SHA256:REDACTED_PUBLIC_KEY_HASH
 KERN: package_daemon: [32199506375:    67] CommitTransactionHandler::_ChangePackageActivation(): activating 6, deactivating 0 packages
 KERN: unknown: [32199506600:    67] Volume::_ChangeActivation(): 6 new packages, 0 old packages
 KERN: unknown: [32199575045:    67] package "media_helpers-0.1-1-x86_64.hpkg" activated

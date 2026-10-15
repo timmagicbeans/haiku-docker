@@ -1,8 +1,14 @@
+<div align="center">
+
 # Docker on Haiku OS (Accelerated by NVMM)
 
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/timmagicbeans)
-
 Native Docker engine CLI and lightweight Linux micro-VM virtualization environment for Haiku OS, accelerated by NetBSD Virtual Machine Monitor (NVMM) port and QEMU.
+
+<br/>
+
+<a href="https://buymeacoffee.com/timmagicbeans" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" style="height: 50px !important;width: 217px !important;" /></a>
+
+</div>
 
 ## Architecture Overview
 

@@ -8,6 +8,10 @@ Native Docker engine CLI and lightweight Linux micro-VM virtualization environme
 
 <a href="https://buymeacoffee.com/timmagicbeans" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" style="height: 50px !important;width: 217px !important;" /></a>
 
+<br/><br/>
+
+![Docker on Haiku OS Demo](assets/demo.gif)
+
 </div>
 
 ## Architecture Overview
